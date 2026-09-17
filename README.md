@@ -1,6 +1,6 @@
 # RadioAndroid for Windows
 
-Internet radio for Windows 10 and 11 — a desktop port of **RadioAndroid PRO** for Android. One engine
+Internet radio for Windows 10 and 11 — a desktop port of **RadioAndroid** for Android. One engine
 (libvlc), your own station list, a 10-band equalizer, ICY metadata with cover art, skins and a VU
 meter, a sleep timer, a tray icon and media keys.
 
