@@ -4,6 +4,14 @@ Internet radio for Windows 10 and 11 — a desktop port of **RadioAndroid PRO** 
 (libvlc), your own station list, a 10-band equalizer, ICY metadata with cover art, skins and a VU
 meter, a sleep timer, a tray icon and media keys.
 
+> ### This is a port of the Android app
+> The original is **RadioAndroid PRO** for Android: <https://toevi.github.io/RadioAndroidPro/>
+> (Google Play, screenshots, full description). The Windows version keeps the same engine, the same
+> look and the same file formats — playlists, equalizer presets and skins move between the phone and
+> the PC in both directions. What it does **not** carry over are the parts that only make sense on a
+> phone: Android Auto and Bluetooth remote control. If you are new here, start with the Android page;
+> it explains what the radio is and who it is for.
+
 > **This repository holds the download and the documents only — there is no source code here.**
 > Nothing to look for in the Code tab.
 
@@ -98,5 +106,3 @@ optional, and nothing in the app depends on it.
 
 Say what you did and what happened; a screenshot helps. If the fault needs proof, the app can write a
 diagnostic log on request — ask me and I will send the one-liner that turns it on.
-
-The Android version lives at <https://toevi.github.io/RadioAndroidPro/>.
