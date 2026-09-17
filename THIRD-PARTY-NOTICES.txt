@@ -1,4 +1,4 @@
-﻿RADIOANDROID FOR WINDOWS - THIRD-PARTY NOTICES
+﻿RadioAndroid for Windows - THIRD-PARTY NOTICES
 
 RadioAndroid for Windows includes the components listed below. Each is provided under its own
 license; the End User License Agreement does not limit the rights these licenses give you.
