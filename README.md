@@ -5,7 +5,7 @@ Internet radio for Windows 10 and 11 — a desktop port of **RadioAndroid** for 
 meter, a sleep timer, a tray icon and media keys.
 
 > ### This is a port of the Android app
-> The original is **RadioAndroid PRO** for Android: <https://toevi.github.io/RadioAndroidPro/>
+> The original is **RadioAndroid** for Android: <https://toevi.github.io/RadioAndroidPro/>
 > (Google Play, screenshots, full description). The Windows version keeps the same engine, the same
 > look and the same file formats — playlists, equalizer presets and skins move between the phone and
 > the PC in both directions. What it does **not** carry over are the parts that only make sense on a
