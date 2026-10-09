@@ -139,5 +139,10 @@ optional, and nothing in the app depends on it.
 
 ## Reporting a problem
 
-Say what you did and what happened; a screenshot helps. If the fault needs proof, the app can write a
-diagnostic log on request — ask me and I will send the one-liner that turns it on.
+Open an **[issue](../../issues/new/choose)** — the form asks for the app version, your Windows version
+and what happened; a screenshot helps. This page is public, so anything private goes by e-mail instead:
+tomek.maselko@gmail.com.
+
+If the fault needs proof, the app can write a diagnostic log on request: create an empty file named
+`DIAG` in `Documents\RadioAndroid` and restart the app (details in [PRIVACY.md](PRIVACY.md), section 5).
+The log lists the stations you played, so look through it before attaching it anywhere.

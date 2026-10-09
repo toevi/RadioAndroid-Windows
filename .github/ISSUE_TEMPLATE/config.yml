@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: RadioAndroid for Android (the phone app)
+    url: https://toevi.github.io/RadioAndroidPro/
+    about: Questions about the Android version belong there, not here.
+  - name: Private message to the developer
+    url: mailto:tomek.maselko@gmail.com
+    about: For anything you do not want on a public page.

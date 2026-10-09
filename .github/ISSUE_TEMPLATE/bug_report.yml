@@ -1,0 +1,46 @@
+name: Something does not work
+description: A station will not play, the app misbehaves, the installer fails…
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. A short, concrete report is the most useful one.
+        **Do not paste anything private** — this page is public.
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: Help → About shows it (for example 0.1.5).
+      placeholder: "0.1.5"
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      description: Press Win+R, type `winver`, Enter — copy the line with the version and build.
+      placeholder: "Windows 11 24H2 (build 26100)"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead. A screenshot helps.
+    validations:
+      required: true
+  - type: input
+    id: station
+    attributes:
+      label: Station (if it is about playback)
+      description: The station's name and its stream address, if you are happy to share them.
+  - type: textarea
+    id: log
+    attributes:
+      label: Diagnostic log (optional)
+      description: |
+        Only if I ask for it, or if you want to: create an empty file named `DIAG` in
+        `Documents\RadioAndroid`, restart the app, reproduce the problem, then attach
+        `%LOCALAPPDATA%\RadioAndroid\logs\radio.log`. The log contains the stations you played and
+        the titles they broadcast — look through it before attaching. Delete `DIAG` afterwards.
