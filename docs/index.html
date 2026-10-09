@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RadioAndroid for Windows — Internet Radio for the Desktop</title>
+<meta name="description" content="RadioAndroid for Windows — the desktop port of RadioAndroid. Same C# codebase, LibVLC engine, 10-band equalizer, ICY metadata and cover art. Windows 10/11 x64."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:     #070b12;
+  --bg2:    #0a101a;
+  --bg3:    #0e1622;
+  --bg4:    #121d2c;
+  --accent: #4cc2ff;          /* Windows 11 accent, light */
+  --accent2:#0078d4;          /* classic Windows blue */
+  --border: rgba(255,255,255,0.07);
+  --text:   #dfe6ef;
+  --muted:  #6b7b8f;
+  --mono:   'IBM Plex Mono', monospace;
+  --sans:   'IBM Plex Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.6; overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(7,11,18,0.88); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 24px; flex-wrap: wrap; gap: 10px;
+}
+.nav-logo { font-family: var(--mono); font-weight: 700; color: #fff; font-size: 14px; letter-spacing: -0.3px; }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.nav-links a { font-family: var(--mono); font-size: 12px; color: #9fb0c4; text-decoration: none; transition: color .2s; }
+.nav-links a:hover { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  border-bottom: 1px solid rgba(76,194,255,0.18);
+  padding: 56px 28px 60px; text-align: center; position: relative;
+  background: linear-gradient(180deg,#0b1626 0%,#070b12 100%);
+}
+.hero > * { position: relative; z-index: 2; }
+.hero::before {
+  content:''; position:absolute; top:-140px; left:50%; transform:translateX(-50%);
+  width:680px; height:680px; border-radius:50%;
+  background:radial-gradient(circle,rgba(76,194,255,0.10) 0%,transparent 65%); pointer-events:none;
+}
+.hero-icon { font-size: 60px; display: block; margin-bottom: 18px; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.label-small { font-family:var(--mono); font-size:10px; color:var(--accent); letter-spacing:4px; text-transform:uppercase; margin-bottom:10px; }
+.hero h1 { font-family:var(--mono); font-size:clamp(26px,5.4vw,48px); font-weight:700; color:#fff; letter-spacing:-1px; margin-bottom:12px; }
+.hero h1 span { color:var(--accent); }
+.hero-sub { font-size:1.08rem; color:#9fb0c4; margin:0 auto 30px; max-width:560px; }
+.badges { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:34px; }
+.badge {
+  font-family:var(--mono); font-size:11px;
+  background:rgba(76,194,255,0.06); border:1px solid rgba(76,194,255,0.3);
+  border-radius:20px; padding:7px 14px; color:var(--accent); white-space:nowrap;
+}
+.hero-cta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+/* ── BUTTONS ── */
+.btn {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--mono); font-size:13px; font-weight:600;
+  padding:13px 26px; border-radius:8px; text-decoration:none;
+  transition:all .2s; border:none; cursor:pointer;
+}
+.btn-primary { background:var(--accent); color:#04121d; }
+.btn-primary:hover { background:#fff; transform:translateY(-2px); box-shadow:0 8px 24px rgba(76,194,255,0.25); }
+.btn-ghost { background:transparent; color:#c3d0dd; border:1px solid rgba(255,255,255,0.15); }
+.btn-ghost:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+
+/* ── SECTIONS ── */
+.section { padding:70px 28px; max-width:1200px; margin:0 auto; }
+.section-title { font-family:var(--mono); font-size:10px; color:var(--accent); letter-spacing:4px; text-transform:uppercase; margin-bottom:8px; }
+.section-heading { font-family:var(--mono); font-size:clamp(21px,3.6vw,32px); font-weight:700; color:#fff; margin-bottom:38px; }
+.section-heading span { color:var(--accent); }
+.stripe { height:1px; background:linear-gradient(90deg,transparent,rgba(76,194,255,0.35),transparent); }
+
+/* ── FEATURES ── */
+.features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; }
+.feature-card {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:14px; padding:26px 24px; transition:all .2s; position:relative; overflow:hidden;
+}
+.feature-card::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .3s;
+}
+.feature-card:hover { border-color:rgba(76,194,255,0.35); transform:translateY(-3px); }
+.feature-card:hover::after { transform:scaleX(1); }
+.f-icon { font-size:26px; margin-bottom:12px; }
+.feature-card h3 { font-family:var(--mono); font-size:15px; color:#fff; margin-bottom:8px; font-weight:600; }
+.feature-card p { font-size:14px; color:#9fb0c4; }
+
+/* ── GALLERY ── */
+.screenshots-section { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:70px 28px; }
+.screenshots-inner { max-width:1200px; margin:0 auto; }
+.screenshot-group { margin-bottom:44px; }
+.screenshot-group-label { font-family:var(--mono); font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; color:var(--accent); }
+.screenshot-group-note { font-size:13px; color:var(--muted); margin-bottom:18px; max-width:760px; }
+/* align-items:start — without it every tile stretches to the tallest one in its row, and a row
+   that mixes a phone-shaped window with a landscape one ends up mostly empty frame. */
+.screenshot-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; align-items:start; }
+.screenshot-grid.wide { grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); }
+.screenshot-item {
+  background:var(--bg3); border:1px solid var(--border); border-radius:12px;
+  padding:10px; transition:all .2s;
+}
+.screenshot-item:hover { border-color:rgba(76,194,255,0.35); transform:translateY(-3px); }
+.screenshot-item img { width:100%; height:auto; border-radius:7px; display:block; }
+.shot-tag { font-family:var(--mono); font-size:10px; color:var(--muted); margin-top:9px; text-align:center; }
+
+/* ── DOWNLOAD ── */
+.download-section { padding:70px 28px; background:linear-gradient(180deg,#070b12 0%,#0b1626 100%); }
+.download-inner { max-width:1100px; margin:0 auto; }
+.download-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:20px; align-items:start; }
+.download-card { background:var(--bg3); border:1px solid var(--border); border-radius:16px; padding:30px 26px; }
+.download-card.featured { border-color:rgba(76,194,255,0.4); box-shadow:0 0 36px rgba(76,194,255,0.07); }
+.dc-icon { font-size:30px; margin-bottom:12px; }
+.dc-title { font-family:var(--mono); font-size:18px; font-weight:700; color:#fff; }
+.dc-sub { font-size:13px; color:var(--muted); margin-bottom:14px; }
+.dc-price { font-family:var(--mono); font-size:22px; color:var(--accent); margin-bottom:18px; }
+.dc-price span { font-size:12px; color:var(--muted); }
+.feature-list { list-style:none; margin-bottom:22px; }
+.feature-list li { font-size:13.5px; color:#b6c4d4; padding:5px 0; display:flex; gap:9px; align-items:flex-start; }
+.download-card a:not(.btn) { color:var(--accent); }
+.download-card a:not(.btn):hover { text-decoration:underline; }
+.check { color:var(--accent); flex-shrink:0; }
+.dim { color:#3d4a5a; flex-shrink:0; }
+
+/* ── HASH BOX ── */
+.hashbox {
+  font-family:var(--mono); font-size:11.5px; color:#8fa3ba;
+  background:var(--bg4); border:1px solid var(--border); border-radius:10px;
+  padding:16px 18px; margin-top:18px; overflow-x:auto;
+}
+.hashbox b { color:#fff; font-weight:600; }
+.hashbox code { color:var(--accent); word-break:break-all; }
+
+/* ── TABLE ── */
+.cmp { width:100%; border-collapse:collapse; font-size:13.5px; }
+.cmp th, .cmp td { text-align:left; padding:11px 14px; border-bottom:1px solid var(--border); }
+.cmp th { font-family:var(--mono); font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--accent); }
+.cmp td:first-child { color:#fff; }
+.cmp td { color:#9fb0c4; }
+.yes { color:var(--accent); }
+.no  { color:#5b6a7d; }
+
+/* ── LINKS ── */
+.links-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; }
+.link-card { background:var(--bg3); border:1px solid var(--border); border-radius:12px; padding:20px 22px; text-decoration:none; display:block; transition:all .2s; }
+.link-card:hover { border-color:rgba(76,194,255,0.35); transform:translateY(-3px); }
+.link-card h4 { font-family:var(--mono); font-size:14px; color:#fff; margin-bottom:5px; }
+.link-card p { font-size:13px; color:var(--muted); }
+
+/* ── SUPPORT ── */
+.support-section { background:var(--bg2); border-top:1px solid var(--border); padding:60px 28px; text-align:center; }
+.support-section h2 { font-family:var(--mono); font-size:clamp(19px,3vw,26px); color:#fff; margin-bottom:12px; }
+.support-section p { color:#9fb0c4; max-width:560px; margin:0 auto 26px; }
+.support-section .highlight { color:var(--accent); }
+
+/* ── FOOTER ── */
+footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border); }
+.footer-logo { font-family:var(--mono); font-size:16px; font-weight:700; color:#fff; margin-bottom:6px; }
+.footer-logo span { color:var(--accent); }
+.footer-sub { font-size:13px; color:var(--muted); margin-bottom:18px; }
+.footer-links { display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-bottom:18px; }
+.footer-links a { font-family:var(--mono); font-size:12px; color:#9fb0c4; text-decoration:none; }
+.footer-links a:hover { color:var(--accent); }
+.footer-copy { font-size:12px; color:#48586a; }
+
+@media (max-width:640px) {
+  .section { padding:52px 20px; }
+  .screenshots-section, .download-section { padding:52px 20px; }
+  .nav-links { gap:12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">RadioAndroid <span>for Windows</span></div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#screenshots">Gallery</a>
+    <a href="#download">Download</a>
+    <a href="#differences">vs. Android</a>
+    <a href="details.html">Technical details</a>
+    <a href="https://toevi.github.io/RadioAndroidPro/">Android version</a>
+  </div>
+</nav>
+
+<!-- BANNER -->
+<div style="width:100%;overflow:hidden;max-height:400px;position:relative;background:var(--bg);">
+  <img src="banner.jpg" alt="RadioAndroid" style="width:100%;display:block;object-fit:cover;object-position:center 70%;max-height:400px;opacity:0.9;"/>
+  <!-- Same banner treatment as the Android site (owner, 2026-10-09: the dimmed, desaturated version
+       looked dark next to the phone page). Only the bottom fade differs: it ends in this page's
+       background colour so the artwork runs into the blue page instead of being cut off. -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(0deg,var(--bg) 0%,transparent 100%);"></div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <span class="hero-icon">🪟</span>
+  <div class="label-small">Internet Radio for Windows 10/11</div>
+  <h1>RadioAndroid <span>for Windows</span></h1>
+  <p class="hero-sub">The desktop port of RadioAndroid. Same C# codebase, same LibVLC engine — rebuilt for a window you can resize, a system tray and a keyboard.</p>
+  <div class="badges">
+    <span class="badge">🎚️ 10-band equalizer</span>
+    <span class="badge">🎵 ICY metadata &amp; cover art</span>
+    <span class="badge">🎨 7 skins &amp; 5 VU meters</span>
+    <span class="badge">⌨️ Keyboard &amp; media keys</span>
+    <span class="badge">🔔 System tray</span>
+    <span class="badge">💾 PLS / JSON playlists</span>
+    <span class="badge">🧩 Single self-contained installer</span>
+    <span class="badge">🆓 Free</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#download" class="btn btn-primary">⬇ Download</a>
+    <a href="#screenshots" class="btn btn-ghost">🖼 See it running</a>
+    <a href="details.html" class="btn btn-ghost" style="border-color:rgba(76,194,255,0.35);color:var(--accent);">🔬 Technical details</a>
+    <a href="https://toevi.github.io/RadioAndroidPro/" class="btn btn-ghost" target="_blank">📱 Android version</a>
+  </div>
+</header>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-title">What it is</div>
+  <div class="section-heading">The phone app, <span>at home on the desktop</span></div>
+  <div class="features-grid">
+
+    <div class="feature-card">
+      <div class="f-icon">🔊</div>
+      <h3>One engine, every stream</h3>
+      <p>LibVLC 3.0.23 plays ICY, MP3, AAC, Ogg and HLS. No second engine to choose, nothing to configure — paste a URL and it plays.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="f-icon">🪟</div>
+      <h3>Any window size</h3>
+      <p>Narrow like a phone, half a screen, a quarter, or the whole monitor. The player switches to two columns when there is room; the station grid adds columns as you widen it.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="f-icon">🎵</div>
+      <h3>Cover art &amp; live metadata</h3>
+      <p>ICY titles are read from the stream, and the cover comes from iTunes, Deezer or AudioAddict. Station logos are cached on disk so the grid stays fast.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="f-icon">🎚️</div>
+      <h3>10-band equalizer</h3>
+      <p>60 Hz to 16 kHz, with presets you can save and load. The same EQ files as the phone version.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="f-icon">🎨</div>
+      <h3>Skins and VU meters</h3>
+      <p>Seven backgrounds plus your own custom colours, five VU meter styles, and Light / Dark / Auto for the bars — Auto takes its colours from the skin.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="f-icon">🔔</div>
+      <h3>Lives in the tray</h3>
+      <p>Closing the window keeps the radio playing. Left click brings it back, right click gives you play/pause, previous, next and exit.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="f-icon">⌨️</div>
+      <h3>Keyboard and media keys</h3>
+      <p>Ctrl+P plays, Ctrl+←/→ change station, Ctrl+1/2/3 switch tabs, F1 opens help. The keyboard's media keys work even when the window is in the background, through the Windows media session.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="f-icon">🖱️</div>
+      <h3>Mouse where you expect it</h3>
+      <p>The wheel over the volume bar changes volume, a double click on the cover plays or stops, drag and drop reorders stations, and the fourth mouse button goes back — as in a browser.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="f-icon">💾</div>
+      <h3>Your files stay yours</h3>
+      <p>Playlists, EQ presets and skins live in <code>Documents\RadioAndroid</code> in the same formats as on the phone — copy them across and they just work. Uninstalling never touches them.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="f-icon">🛡️</div>
+      <h3>Reconnect &amp; watchdog</h3>
+      <p>A stream that dies is reconnected; one that goes silent without an error is detected by watching the audio buffers, not just the player state.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="f-icon">⏱️</div>
+      <h3>Sleep timer</h3>
+      <p>Set it from the moon in the bar and the countdown replaces the icon. Stopping playback yourself clears the timer.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="f-icon">📦</div>
+      <h3>One installer, nothing else</h3>
+      <p>Self-contained: .NET, the Windows App SDK and LibVLC are all in the package. No runtime to install first, no store account, no background updater.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots-section" id="screenshots">
+  <div class="screenshots-inner">
+    <div class="section-title">Gallery</div>
+    <div class="section-heading">Real windows, <span>real streams</span></div>
+
+    <div class="screenshot-group">
+      <div class="screenshot-group-label">One window, any size</div>
+      <p class="screenshot-group-note">The same app at phone width, at half a screen, at a quarter and maximised. Nothing is cut off and nothing is stretched — the layout reflows.</p>
+      <div class="screenshot-grid wide">
+        <div class="screenshot-item">
+          <img src="10-player-szerokie.jpg" alt="Player in a wide window: cover art on the left, station, track title and transport controls on the right" loading="lazy"/>
+          <p class="shot-tag">Wide window — the player splits into two columns</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="04-stacje-max.jpg" alt="Station list maximised on a 1920x1080 screen, six tiles per row" loading="lazy"/>
+          <p class="shot-tag">Maximised — the station grid adds columns</p>
+        </div>
+      </div>
+      <div class="screenshot-grid" style="margin-top:16px;">
+        <div class="screenshot-item">
+          <img src="01-player-waskie.jpg" alt="Player at phone width, cover art above the station name and transport buttons" loading="lazy"/>
+          <p class="shot-tag">Phone width (480 px)</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="02-stacje-waskie.jpg" alt="Station list at phone width, two tiles per row" loading="lazy"/>
+          <p class="shot-tag">Phone width — station list</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="03-stacje-pol.jpg" alt="Station list in a half-screen window, three tiles per row" loading="lazy"/>
+          <p class="shot-tag">Half screen</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="07-pls-cwiartka.jpg" alt="Playlist tab in a small window: save, load, share, clear and the PLS reconstructor" loading="lazy"/>
+          <p class="shot-tag">Quarter screen — playlists</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="screenshot-group">
+      <div class="screenshot-group-label">Skins, VU meters and cover art</div>
+      <p class="screenshot-group-note">Seven skins and five VU meter styles, all shown here on live RadioTunes streams — the cover art and the track title come from the stream itself.</p>
+      <div class="screenshot-grid">
+        <div class="screenshot-item">
+          <img src="09-player-gra.jpg" alt="Blue skin, bar-style VU meter, album cover and the track title from the stream" loading="lazy"/>
+          <p class="shot-tag">Ocean skin · bar VU</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="11-skora-night.jpg" alt="Night skin with a line-style VU meter over an album cover" loading="lazy"/>
+          <p class="shot-tag">Night skin · line VU</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="12-skora-purple.jpg" alt="Purple skin with a wave-style VU meter over an album cover" loading="lazy"/>
+          <p class="shot-tag">Purple skin · wave VU</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="13-skora-white.jpg" alt="White skin with the scrolling text VU meter, light theme bars" loading="lazy"/>
+          <p class="shot-tag">White skin · text VU · light bars</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="screenshot-group">
+      <div class="screenshot-group-label">Equalizer and settings</div>
+      <p class="screenshot-group-note">Everything has a button — nothing is hidden behind a gesture you have to guess.</p>
+      <!-- Flex, not the auto-fit grid: these two windows have very different shapes, and a grid
+           column would stretch the narrow one to match the wide one. -->
+      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;">
+        <div class="screenshot-item" style="flex:1 1 380px;max-width:620px;">
+          <img src="05-eq-pol.jpg" alt="Ten-band equalizer from 60 Hz to 16 kHz with save, load, reset and link controls" loading="lazy"/>
+          <p class="shot-tag">10-band equalizer with presets</p>
+        </div>
+        <div class="screenshot-item" style="flex:0 1 270px;">
+          <img src="06-skorki.jpg" alt="Side panel with VU meter settings, app theme, cover art opacity and the skin palette" loading="lazy"/>
+          <p class="shot-tag">Skins, theme and VU settings in one panel</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="download-section" id="download">
+  <div class="download-inner">
+    <div class="section-title">Get it</div>
+    <div class="section-heading">Download <span>for Windows</span></div>
+    <div class="download-cards">
+
+      <div class="download-card featured">
+        <div class="dc-icon">🪟</div>
+        <div class="dc-title">RadioAndroid for Windows</div>
+        <div class="dc-sub">Version 0.1.5 · Windows 10/11 x64</div>
+        <div class="dc-price">Free <span>· no account, no ads</span></div>
+        <ul class="feature-list">
+          <li><span class="check">✓</span> Self-contained installer — .NET 10, Windows App SDK and LibVLC included</li>
+          <li><span class="check">✓</span> Installs per machine into Program Files, updates in place</li>
+          <li><span class="check">✓</span> Uninstall removes the program and leaves your stations and playlists alone</li>
+          <li><span class="check">✓</span> 10-band equalizer, skins, VU meters, sleep timer</li>
+          <li><span class="check">✓</span> ICY metadata, cover art, station logos</li>
+          <li><span class="check">✓</span> System tray, keyboard shortcuts, media keys</li>
+          <li><span class="check">✓</span> PLS and JSON import / export, shared with the phone app</li>
+          <li><span class="dim">—</span> <span style="color:#5b6a7d">Not code-signed — on purpose, see below</span></li>
+        </ul>
+        <a href="https://github.com/toevi/RadioAndroid-Windows-Release/releases/latest" class="btn btn-primary" target="_blank">⬇ Download from GitHub</a>
+        <div class="hashbox">
+          <b>0.1.5 · RadioAndroid-for-Windows-Setup.zip · 62 MB</b><br/>
+          SHA-256 of the zip <code>8E3442BAE30ADF8BAE58D0C77F9DC004B18404FA57FA20CE31C9852A699CBE65</code><br/>
+          <span style="color:#5b6a7d">Check it in PowerShell before installing:
+          <code style="color:#8fa3ba">Get-FileHash RadioAndroid-for-Windows-Setup.zip</code> — the result must match
+          character for character. The same hash is in the release notes on GitHub.</span>
+        </div>
+      </div>
+
+      <div class="download-card">
+        <div class="dc-icon">🔓</div>
+        <div class="dc-title">Not code-signed — on purpose</div>
+        <div class="dc-sub">How to install it</div>
+        <p style="color:#9fb0c4;font-size:0.92rem;margin:12px 0 4px;">
+          A code-signing certificate costs money every year, and this app is free and earns nothing. So
+          Windows treats the installer as coming from an <em>unknown publisher</em>. That says who paid for
+          a certificate, not what is in the file — the SHA-256 above is what proves the file is the one
+          published here.
+        </p>
+        <ul class="feature-list" style="margin-top:12px;">
+          <li><span class="check">1</span> <span>Download the zip. If the browser says it "isn't commonly downloaded", choose <b>Keep</b>.</span></li>
+          <li><span class="check">2</span> <span>Right-click the zip → <b>Properties</b> → tick <b>Unblock</b> → OK. Then extract it.</span></li>
+          <li><span class="check">3</span> <span>If you skipped step 2: on the blue <b>"Windows protected your PC"</b> screen click <b>More info → Run anyway</b>.</span></li>
+          <li><span class="check">4</span> <span>Allow the app from an unknown publisher to make changes (<b>Yes</b>) — needed once, for Program Files.</span></li>
+          <li><span class="check">5</span> <span>Accept the licence and <b>Install</b>. Nothing installs silently.</span></li>
+        </ul>
+        <p style="color:#5b6a7d;font-size:0.85rem;margin-top:10px;">
+          Windows 11 with <b>Smart App Control</b> on blocks unsigned programs with no "Run anyway". Switch it
+          off in <i>Windows Security → App &amp; browser control → Smart App Control settings</i>, install, and
+          switch it back on if you like (possible without reinstalling since the April 2026 update of 25H2).
+        </p>
+      </div>
+
+      <div class="download-card">
+        <div class="dc-icon">🖥️</div>
+        <div class="dc-title">What it needs</div>
+        <div class="dc-sub">Requirements</div>
+        <ul class="feature-list" style="margin-top:14px;">
+          <li><span class="check">✓</span> Windows 10 version 2004 (build 19041) or Windows 11</li>
+          <li><span class="check">✓</span> 64-bit x64 processor</li>
+          <li><span class="check">✓</span> ~250 MB of disk space</li>
+          <li><span class="check">✓</span> An internet connection for the streams</li>
+          <li><span class="dim">—</span> <span style="color:#5b6a7d">No ARM64 build</span></li>
+          <li><span class="dim">—</span> <span style="color:#5b6a7d">No 32-bit build</span></li>
+          <li><span class="dim">—</span> <span style="color:#5b6a7d">Windows "N" editions need Microsoft's free Media Feature Pack for AAC stations</span></li>
+        </ul>
+        <p style="color:#5b6a7d;font-size:0.85rem;margin:6px 0 14px;">
+          Licence: <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/EULA.txt" target="_blank">EULA</a> ·
+          <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/PRIVACY.md" target="_blank">Privacy policy</a> ·
+          <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/THIRD-PARTY-NOTICES.txt" target="_blank">Third-party licences</a><br/>
+          Found a problem? <a href="https://github.com/toevi/RadioAndroid-Windows-Release/issues/new/choose" target="_blank">Report it on GitHub</a>.
+        </p>
+        <a href="https://toevi.github.io/RadioAndroidPro/" class="btn btn-ghost" target="_blank">📱 Looking for Android?</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- DIFFERENCES -->
+<section class="section" id="differences">
+  <div class="section-title">Honest list</div>
+  <div class="section-heading">What the desktop port <span>does and does not do</span></div>
+  <p style="color:#9fb0c4;max-width:760px;margin-bottom:26px;">
+    Half of the Android app is about the car and the phone — Android Auto, the Bluetooth media session,
+    switching from Wi-Fi to mobile data. None of that has a meaning on a desktop, so none of it was
+    ported. What is left is the radio itself, plus the things a desktop expects and a phone does not have.
+  </p>
+  <table class="cmp">
+    <thead>
+      <tr><th>Feature</th><th>Android</th><th>Windows</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Internet radio, ICY metadata, cover art</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+      <tr><td>10-band equalizer with presets</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+      <tr><td>Skins, VU meters, sleep timer</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+      <tr><td>PLS / JSON playlists (same file format)</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+      <tr><td>HLS (.m3u8) streams</td><td class="yes">ExoPlayer</td><td class="yes">LibVLC</td></tr>
+      <tr><td>Keeps playing in the background</td><td class="yes">foreground service</td><td class="yes">system tray</td></tr>
+      <tr><td>Keyboard shortcuts &amp; media keys</td><td class="no">—</td><td class="yes">yes</td></tr>
+      <tr><td>Resizable window, two-column player</td><td class="no">—</td><td class="yes">yes</td></tr>
+      <tr><td>Android Auto</td><td class="yes">certified</td><td class="no">not applicable</td></tr>
+      <tr><td>Bluetooth media session (AVRCP)</td><td class="yes">yes</td><td class="no">—</td></tr>
+      <tr><td>Wi-Fi → mobile data fallback</td><td class="yes">yes</td><td class="no">not applicable</td></tr>
+      <tr><td>Chromecast / TV</td><td class="yes">yes</td><td class="no">—</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="stripe"></div>
+
+<!-- UNDER THE HOOD -->
+<section class="section" id="tech">
+  <div class="section-title">Under the hood</div>
+  <div class="section-heading">One codebase, <span>two platforms</span></div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="f-icon">⚙️</div>
+      <h3>C# 13 / .NET 10, MAUI on WinUI 3</h3>
+      <p>The namespaces, the view models and the service layer are the Android ones, unchanged — the port was done by subtraction, not by rewriting.</p>
+    </div>
+    <div class="feature-card">
+      <div class="f-icon">🎛️</div>
+      <h3>LibVLC 3.0.23</h3>
+      <p>The same engine as the phone app uses for everything except HLS. On Windows it handles HLS too, so there is only one engine to reason about.</p>
+    </div>
+    <div class="feature-card">
+      <div class="f-icon">📜</div>
+      <h3>Open source underneath</h3>
+      <p>LibVLC and LibVLCSharp under LGPL-2.1, .NET MAUI and the Community Toolkit under MIT, Material Icons under Apache-2.0. The full licence texts ship with the app.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<div class="support-section">
+  <div style="font-size:34px;margin-bottom:14px;">☕</div>
+  <h2>Support the project</h2>
+  <p>If <span class="highlight">RadioAndroid</span> plays in your room the way it plays in the car, consider buying the developer a coffee.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+    <a href="https://buycoffee.to/toevi" class="btn btn-primary" target="_blank">☕ buycoffee.to</a>
+    <a href="https://buymeacoffee.com/toevi" class="btn btn-primary" target="_blank">☕ buymeacoffee.com</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">RadioAndroid <span>for Windows</span></div>
+  <div class="footer-sub">Internet radio for Windows 10/11 · version 0.1.5</div>
+  <div class="footer-links">
+    <a href="https://toevi.github.io/RadioAndroidPro/" target="_blank">Android version</a>
+    <a href="mailto:tomek.maselko@gmail.com">Email</a>
+    <a href="https://buycoffee.to/toevi" target="_blank">buycoffee.to</a>
+    <a href="https://buymeacoffee.com/toevi" target="_blank">buymeacoffee.com</a>
+    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/PRIVACY.md" target="_blank">Privacy Policy</a>
+    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/EULA.txt" target="_blank">Licence (EULA)</a>
+    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/issues" target="_blank">Report a problem</a>
+    <a href="details.html">🔬 Technical details</a>
+  </div>
+  <div class="footer-copy">© 2026 Tomasz Masłowski · VLC, LibVLC and VideoLAN are trademarks of the VideoLAN organisation</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RadioAndroid for Windows — Technical Details</title>
+<meta name="description" content="How the Windows port of RadioAndroid works: one LibVLC engine, the watchdog that watches audio buffers, the equalizer, the installer, and an honest list of what it cannot do."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#070b12; --bg2:#0a101a; --bg3:#0e1622; --bg4:#121d2c;
+  --accent:#4cc2ff; --accent2:#0078d4;
+  --border:rgba(255,255,255,0.07); --text:#dfe6ef; --muted:#6b7b8f;
+  --mono:'IBM Plex Mono',monospace; --sans:'IBM Plex Sans',sans-serif;
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--sans); line-height:1.65; overflow-x:hidden; }
+
+nav {
+  position:sticky; top:0; z-index:50;
+  background:rgba(7,11,18,0.9); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 24px; flex-wrap:wrap; gap:10px;
+}
+.nav-brand { font-family:var(--mono); font-weight:700; color:#fff; font-size:14px; text-decoration:none; }
+.nav-brand em { color:var(--accent); font-style:normal; }
+.nav-links { display:flex; gap:18px; flex-wrap:wrap; }
+.nav-links a { font-family:var(--mono); font-size:12px; color:#9fb0c4; text-decoration:none; transition:color .2s; }
+.nav-links a:hover { color:var(--accent); }
+
+.hero { padding:56px 28px 52px; text-align:center; position:relative; background:linear-gradient(180deg,#0b1626 0%,#070b12 100%); border-bottom:1px solid rgba(76,194,255,0.18); }
+.hero-glow { position:absolute; top:-140px; left:50%; transform:translateX(-50%); width:620px; height:620px; border-radius:50%; background:radial-gradient(circle,rgba(76,194,255,0.10) 0%,transparent 65%); pointer-events:none; }
+.hero > *:not(.hero-glow) { position:relative; z-index:2; }
+.hero-kicker { font-family:var(--mono); font-size:10px; color:var(--accent); letter-spacing:4px; text-transform:uppercase; margin-bottom:12px; }
+.hero h1 { font-family:var(--mono); font-size:clamp(24px,5vw,42px); color:#fff; margin-bottom:12px; }
+.hero h1 em { color:var(--accent); font-style:normal; }
+.hero-sub { color:#9fb0c4; max-width:640px; margin:0 auto 26px; }
+.hero-tags { display:flex; gap:9px; justify-content:center; flex-wrap:wrap; }
+.htag { font-family:var(--mono); font-size:11px; padding:6px 13px; border-radius:20px; border:1px solid rgba(255,255,255,0.12); color:#9fb0c4; }
+.htag.hi { border-color:rgba(76,194,255,0.35); color:var(--accent); background:rgba(76,194,255,0.05); }
+
+.wrap { max-width:1100px; margin:0 auto; padding:0 28px; }
+.sec { padding:62px 0; border-bottom:1px solid var(--border); }
+.sec-kicker { font-family:var(--mono); font-size:10px; color:var(--accent); letter-spacing:4px; text-transform:uppercase; margin-bottom:8px; }
+.sec-title { font-family:var(--mono); font-size:clamp(20px,3.4vw,30px); font-weight:700; color:#fff; margin-bottom:16px; }
+.sec-title em { color:var(--accent); font-style:normal; }
+.sec-desc { color:#9fb0c4; max-width:820px; margin-bottom:30px; }
+.sec-desc strong { color:#fff; font-weight:600; }
+
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:16px; align-items:start; }
+.card { background:var(--bg3); border:1px solid var(--border); border-radius:14px; padding:24px 22px; transition:all .2s; }
+.card:hover { border-color:rgba(76,194,255,0.32); transform:translateY(-3px); }
+.c-icon { font-size:24px; margin-bottom:10px; }
+.card h4 { font-family:var(--mono); font-size:14px; color:#fff; margin-bottom:8px; }
+.card p { font-size:13.5px; color:#9fb0c4; }
+.c-tag { font-family:var(--mono); font-size:10px; color:var(--accent); margin-top:12px; padding-top:10px; border-top:1px solid var(--border); }
+
+.note { background:var(--bg4); border-left:3px solid var(--accent2); border-radius:0 10px 10px 0; padding:16px 20px; margin-top:22px; font-size:13.5px; color:#a9bacd; }
+.note b { color:#fff; }
+code { font-family:var(--mono); font-size:0.92em; color:var(--accent); }
+
+.pc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; align-items:start; }
+.pc-table { background:var(--bg3); border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+.pc-head { font-family:var(--mono); font-size:12px; padding:14px 20px; display:flex; gap:9px; align-items:center; letter-spacing:1px; text-transform:uppercase; }
+.pc-head.pro { background:rgba(76,194,255,0.08); color:var(--accent); border-bottom:1px solid rgba(76,194,255,0.2); }
+.pc-head.con { background:rgba(255,168,76,0.07); color:#ffa84c; border-bottom:1px solid rgba(255,168,76,0.2); }
+.pc-row { display:flex; gap:12px; padding:13px 20px; border-bottom:1px solid var(--border); }
+.pc-row:last-child { border-bottom:none; }
+.pc-row .mark { flex-shrink:0; }
+.pc-row .txt strong { display:block; color:#fff; font-size:13.5px; font-weight:600; }
+.pc-row .txt small { display:block; color:var(--muted); font-size:12.5px; line-height:1.5; margin-top:2px; }
+
+.tbl-wrap { overflow-x:auto; border:1px solid var(--border); border-radius:14px; }
+table.feat { width:100%; border-collapse:collapse; font-size:13.5px; min-width:560px; }
+table.feat th, table.feat td { text-align:left; padding:11px 16px; border-bottom:1px solid var(--border); }
+table.feat th { font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); background:var(--bg4); }
+table.feat td:first-child { color:#fff; }
+table.feat td { color:#9fb0c4; }
+table.feat tr:last-child td { border-bottom:none; }
+
+.verdict-box { background:linear-gradient(180deg,#0b1626 0%,#070b12 100%); border-top:1px solid var(--border); padding:58px 28px; text-align:center; }
+.verdict-box h3 { font-family:var(--mono); font-size:clamp(18px,3vw,24px); color:#fff; margin-bottom:12px; }
+.verdict-box p { color:#9fb0c4; max-width:600px; margin:0 auto 24px; }
+.btn { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px; font-weight:600; padding:13px 26px; border-radius:8px; text-decoration:none; transition:all .2s; }
+.btn-primary { background:var(--accent); color:#04121d; }
+.btn-primary:hover { background:#fff; transform:translateY(-2px); }
+.btn-ghost { background:transparent; color:#c3d0dd; border:1px solid rgba(255,255,255,0.15); }
+.btn-ghost:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+
+footer { padding:40px 28px; text-align:center; }
+.footer-links { display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-bottom:14px; }
+.footer-links a { font-family:var(--mono); font-size:12px; color:#9fb0c4; text-decoration:none; }
+.footer-links a:hover { color:var(--accent); }
+.footer-copy { font-size:12px; color:#48586a; }
+
+@media (max-width:640px) { .sec { padding:46px 0; } .wrap { padding:0 20px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">RadioAndroid <em>for Windows</em></a>
+  <div class="nav-links">
+    <a href="#engine">Engine</a>
+    <a href="#stability">Stability</a>
+    <a href="#eq">Equalizer</a>
+    <a href="#install">Installer</a>
+    <a href="#privacy">Privacy</a>
+    <a href="#procon">Pros &amp; Cons</a>
+    <a href="index.html">← App page</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-kicker">Technical Overview · September 2026</div>
+  <h1>RadioAndroid <em>for Windows</em></h1>
+  <p class="hero-sub">How the desktop port actually works — the engine, the failure handling, the installer, and the things it deliberately does not do. Written for people who want to know before they install. <strong style="color:#ddd">You decide.</strong></p>
+  <div class="hero-tags">
+    <span class="htag hi">One engine: LibVLC 3.0.23</span>
+    <span class="htag hi">C# 13 / .NET 10</span>
+    <span class="htag hi">MAUI on WinUI 3</span>
+    <span class="htag hi">Self-contained installer</span>
+    <span class="htag">No telemetry</span>
+    <span class="htag">No ads · no account</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ENGINE -->
+<section class="sec" id="engine">
+  <div class="sec-kicker">Under the hood</div>
+  <div class="sec-title">One engine, <em>not a hybrid</em></div>
+  <p class="sec-desc">
+    The Android app runs two engines: LibVLC for ICY streams and ExoPlayer for HLS. On Windows there is
+    <strong>only LibVLC</strong> — the same engine VLC Media Player is built on, and here it plays HLS as well.
+    One engine means one set of rules for buffering, metadata and errors, instead of two that behave differently
+    on the same stream.
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="c-icon">🌐</div>
+      <h4>Protocols</h4>
+      <p>HTTP and HTTPS, ICY metadata, MP3, AAC, Ogg Vorbis, HLS (.m3u8), RTSP. Paste a URL — there is no engine to pick and no format to declare.</p>
+      <div class="c-tag">LibVLC 3.0.23, x64</div>
+    </div>
+    <div class="card">
+      <div class="c-icon">🧩</div>
+      <h4>47 plugins, not 323</h4>
+      <p>LibVLC ships hundreds of plugins, nearly all of them for video, capture and streaming out. The package carries only the ones an audio player actually loads — the rest are dead weight in an installer people download over a phone connection.</p>
+      <div class="c-tag">Smaller package, same playback</div>
+    </div>
+    <div class="card">
+      <div class="c-icon">🎼</div>
+      <h4>AAC through Windows</h4>
+      <p>AAC is decoded by the decoder that is already part of Windows, not by a bundled one. Fewer moving parts in the package, and no licence question about shipping someone else's decoder.</p>
+      <div class="c-tag">Windows Media Foundation</div>
+    </div>
+    <div class="card">
+      <div class="c-icon">🏷️</div>
+      <h4>Metadata from two sources</h4>
+      <p>LibVLC reports what the stream announces, and a separate ICY probe reads the title directly — because LibVLC only surfaces ICY titles over plain <code>http://</code>. Whichever answers first wins.</p>
+      <div class="c-tag">Same title the phone shows</div>
+    </div>
+    <div class="card">
+      <div class="c-icon">🖼️</div>
+      <h4>Cover art</h4>
+      <p>The artist and title are looked up at iTunes, Deezer and AudioAddict; the first cover found is shown. Station logos and covers are cached on disk, and the cache is capped at 100 MB so it cannot grow without limit.</p>
+      <div class="c-tag">Plain HTTP, no account anywhere</div>
+    </div>
+    <div class="card">
+      <div class="c-icon">🧵</div>
+      <h4>One command thread</h4>
+      <p>Every call into LibVLC — play, stop, volume, equalizer — is queued onto a single thread. Calling a media player from two threads at once is how a desktop app disappears without a message, and this is the discipline that stops it.</p>
+      <div class="c-tag">Inherited from the Android engine</div>
+    </div>
+  </div>
+</section>
+
+<!-- STABILITY -->
+<section class="sec" id="stability">
+  <div class="sec-kicker">When streams misbehave</div>
+  <div class="sec-title">The watchdog watches <em>the audio</em>, not the status</div>
+  <p class="sec-desc">
+    A dead stream usually does not report an error. The server keeps the connection open, the player still says
+    "playing", and the music simply stops — that is the failure that matters, because it is the one nobody notices
+    until the room goes quiet.
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="c-icon">📉</div>
+      <h4>Silence is detected by counting</h4>
+      <p>Two counters are watched: bytes pulled from the stream and audio buffers actually played. Both flat for six seconds means the stream is wedged, whatever the player claims about its state.</p>
+      <div class="c-tag">Buffering never feeds the watchdog</div>
+    </div>
+    <div class="card">
+      <div class="c-icon">🔁</div>
+      <h4>Reconnect with a hard reset</h4>
+      <p>A wedged or dropped stream is reconnected on its own. If reconnecting is not enough, the whole player is torn down and rebuilt — the same recovery the car version uses, where nobody can pick up a phone and press a button.</p>
+      <div class="c-tag">Timeouts: 20 s for HLS, 15 s for ICY</div>
+    </div>
+    <div class="card">
+      <div class="c-icon">⏳</div>
+      <h4>A 5-second buffer</h4>
+      <p>Long enough to ride out a hiccup, short enough that pressing play does not feel broken. The number came out of measurements, not taste.</p>
+      <div class="c-tag">ICY network cache</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>Why this is written down at all:</b> the rules above were paid for on the phone version — in a car, where a
+    stream that quietly stops is not a bug report but a silent radio on a motorway. The desktop port kept them
+    rather than starting over, which is also why the Windows build shipped with them working from day one.
+  </div>
+</section>
+
+<!-- EQUALIZER -->
+<section class="sec" id="eq">
+  <div class="sec-kicker">Sound</div>
+  <div class="sec-title">A real <em>10-band equalizer</em></div>
+  <p class="sec-desc">
+    Ten bands from 60 Hz to 16 kHz, ±20 dB each, applied inside the LibVLC pipeline — so it works on every stream
+    format, not only on the ones a system effect happens to support. Presets are saved as files you can copy between
+    machines, and the format is the same one the phone app uses.
+  </p>
+  <div class="cards">
+    <div class="card">
+      <div class="c-icon">🎚️</div>
+      <h4>60 Hz – 16 kHz</h4>
+      <p>60, 170, 310, 600 Hz, then 1, 3, 6, 12, 14 and 16 kHz. Bands can be linked so one slider moves the neighbours with it.</p>
+    </div>
+    <div class="card">
+      <div class="c-icon">💾</div>
+      <h4>Presets as files</h4>
+      <p>Saved to <code>Documents\RadioAndroid\EQ</code>, loaded from there, shared with the phone version. Deleting the app never touches them.</p>
+    </div>
+    <div class="card">
+      <div class="c-icon">⚡</div>
+      <h4>Attached before playback</h4>
+      <p>The equalizer is set up before the stream starts. Attaching it mid-playback costs about a second of silence — not a crash, just a gap, and the kind of detail that only shows up if you measure it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INSTALLER -->
+<section class="sec" id="install">
+  <div class="sec-kicker">The package</div>
+  <div class="sec-title">One installer, <em>nothing to install first</em></div>
+  <p class="sec-desc">
+    Self-contained: .NET 10, the Windows App SDK and LibVLC all travel inside the package. No runtime to fetch,
+    no framework to match, no store account. About 250 MB on disk after installation, from a 62.5 MB installer.
+  </p>
+  <div class="cards">
+    <div class="card">
+      <div class="c-icon">🏢</div>
+      <h4>Per machine, in Program Files</h4>
+      <p>Installs for everyone on the computer, asks for elevation once, and updates in place — the same entry in Apps &amp; features, not a second copy beside the first.</p>
+    </div>
+    <div class="card">
+      <div class="c-icon">🔓</div>
+      <h4>Not code-signed — on purpose</h4>
+      <p>A certificate from a recognised authority costs money every year, and this app earns nothing. A self-signed one would change nothing on your PC: Windows would still say "unknown publisher". So the installer is unsigned, and what proves the file is the one published is its <strong>SHA-256</strong>, given on the app page and in the release notes. Releases on GitHub are immutable — a published file cannot be swapped.</p>
+      <div class="c-tag">SHA-256 · immutable releases</div>
+    </div>
+    <div class="card">
+      <div class="c-icon">🧹</div>
+      <h4>Uninstall leaves your files</h4>
+      <p>Removing the app takes the program folder with it, including the copy that sits in the tray. Your playlists, equalizer presets and skins live in Documents and are never touched.</p>
+    </div>
+    <div class="card">
+      <div class="c-icon">🔄</div>
+      <h4>Updating over an older copy</h4>
+      <p>The setup closes a running copy first — including one from the very first release, which carried a different file name. Tested by installing the old build, leaving the radio playing and upgrading it for real.</p>
+    </div>
+    <div class="card">
+      <div class="c-icon">🚫</div>
+      <h4>No background updater</h4>
+      <p>Nothing runs at boot, nothing phones home to look for a new version. When there is one, you get a link.</p>
+    </div>
+    <div class="card">
+      <div class="c-icon">🧾</div>
+      <h4>Checksums published</h4>
+      <p>Every release ships with the SHA-256 of the zip you download, plus a list of checksums for all 381 files the installer puts on your disk.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="sec" id="privacy">
+  <div class="sec-kicker">What leaves your computer</div>
+  <div class="sec-title">Only what a radio <em>has to send</em></div>
+  <p class="sec-desc">
+    The app connects to the stations you choose, to iTunes or Deezer to look up the cover of the track that is
+    playing, and to radio-browser.info or AudioAddict to find a station's logo. Nothing else: no analytics,
+    no crash reporting service, no account, no ads. The full list is in the
+    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/PRIVACY.md" target="_blank">privacy policy</a>.
+  </p>
+  <div class="cards">
+    <div class="card">
+      <div class="c-icon">📁</div>
+      <h4>Your files, in the open</h4>
+      <p>Playlists, equalizer presets and skins you save are plain files in <code>Documents\RadioAndroid</code>, in the same formats as on the phone. Copy them across and they work. Your station list and settings stay in the app's folder under <code>%LOCALAPPDATA%</code>.</p>
+    </div>
+    <div class="card">
+      <div class="c-icon">🪵</div>
+      <h4>The log is off</h4>
+      <p>No diagnostic log is written unless you create an empty file called <code>DIAG</code> in <code>Documents\RadioAndroid</code>. It stays on your disk either way — there is nowhere for it to be sent.</p>
+    </div>
+    <div class="card">
+      <div class="c-icon">📜</div>
+      <h4>Licences in the package</h4>
+      <p>LibVLC and LibVLCSharp under LGPL-2.1, .NET MAUI and the Community Toolkit under MIT, Material Icons under Apache-2.0. Full texts install next to the program and are readable from the app.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROS & CONS -->
+<section class="sec" id="procon">
+  <div class="sec-kicker">Honest assessment</div>
+  <div class="sec-title">What it does well — <em>and what it doesn't</em></div>
+  <p class="sec-desc">This is a young port of a mature phone app. Here is the state of it, so you can decide whether it is worth your disk space.</p>
+
+  <div class="pc-grid">
+    <div class="pc-table">
+      <div class="pc-head pro"><span>✅</span> Strengths</div>
+      <div class="pc-row"><span class="mark">🔊</span><div class="txt"><strong>One engine for every stream</strong><small>LibVLC handles ICY, MP3, AAC, Ogg and HLS — no hybrid, nothing to configure</small></div></div>
+      <div class="pc-row"><span class="mark">🛡️</span><div class="txt"><strong>Failure handling built for cars</strong><small>Reconnect and a watchdog that counts audio buffers, brought over from the Android app</small></div></div>
+      <div class="pc-row"><span class="mark">🪟</span><div class="txt"><strong>Behaves like a desktop program</strong><small>Resizable window, two-column player, system tray, keyboard shortcuts, media keys, mouse back button</small></div></div>
+      <div class="pc-row"><span class="mark">🎚️</span><div class="txt"><strong>Equalizer inside the audio pipeline</strong><small>Works on every format, presets shared with the phone version</small></div></div>
+      <div class="pc-row"><span class="mark">💾</span><div class="txt"><strong>Files you can read</strong><small>Playlists in PLS and JSON, in Documents, portable between the phone and the desktop</small></div></div>
+      <div class="pc-row"><span class="mark">📦</span><div class="txt"><strong>Self-contained installer</strong><small>No runtime to install first, no store, no background updater</small></div></div>
+      <div class="pc-row"><span class="mark">🤫</span><div class="txt"><strong>No telemetry at all</strong><small>No analytics, no crash service, no account; the diagnostic log is off unless you turn it on</small></div></div>
+      <div class="pc-row"><span class="mark">🎨</span><div class="txt"><strong>Skins and VU meters</strong><small>Seven backgrounds plus custom colours, five visualiser styles, Light / Dark / Auto bars</small></div></div>
+      <div class="pc-row"><span class="mark">🆓</span><div class="txt"><strong>Free, no ads</strong><small>Nothing is sold, nothing is shown, nothing is tracked</small></div></div>
+    </div>
+
+    <div class="pc-table">
+      <div class="pc-head con"><span>⚠️</span> Limitations</div>
+      <div class="pc-row"><span class="mark">🧪</span><div class="txt"><strong>A young port</strong><small>Version 0.1.5 — expect rough edges, and please report them on GitHub</small></div></div>
+      <div class="pc-row"><span class="mark">🔓</span><div class="txt"><strong>SmartScreen will warn</strong><small>The installer is not code-signed, so Windows shows the blue "unrecognised app" screen unless you unblock the zip first; Smart App Control blocks it outright</small></div></div>
+      <div class="pc-row"><span class="mark">💻</span><div class="txt"><strong>x64 only</strong><small>No ARM64 build for Snapdragon laptops, and no 32-bit build</small></div></div>
+      <div class="pc-row"><span class="mark">🔍</span><div class="txt"><strong>No built-in station catalogue</strong><small>Six example stations to start with; the rest you add yourself, import from a playlist or find through fmstream.org in your browser</small></div></div>
+      <div class="pc-row"><span class="mark">☁️</span><div class="txt"><strong>No cloud sync</strong><small>Playlists live on the machine; moving them is a file copy</small></div></div>
+      <div class="pc-row"><span class="mark">🎙️</span><div class="txt"><strong>No podcasts</strong><small>Live streams only — no RSS feeds, no episode lists</small></div></div>
+      <div class="pc-row"><span class="mark">📼</span><div class="txt"><strong>No recording</strong><small>The app plays streams, it does not save them</small></div></div>
+      <div class="pc-row"><span class="mark">🚗</span><div class="txt"><strong>None of the car features</strong><small>Android Auto, the Bluetooth media session and the Wi-Fi to mobile-data switch belong to the phone and were not ported</small></div></div>
+      <div class="pc-row"><span class="mark">👤</span><div class="txt"><strong>One developer</strong><small>Updates arrive when there is time to make them</small></div></div>
+    </div>
+  </div>
+
+  <div style="margin-top:38px;">
+    <div style="font-family:var(--mono);font-size:9px;color:var(--accent);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;">Android vs. Windows — full table</div>
+    <div class="tbl-wrap">
+      <table class="feat">
+        <thead><tr><th>Feature</th><th>Android</th><th>Windows</th></tr></thead>
+        <tbody>
+          <tr><td>Audio engine</td><td>LibVLC + ExoPlayer</td><td>LibVLC only</td></tr>
+          <tr><td>ICY metadata and cover art</td><td>yes</td><td>yes</td></tr>
+          <tr><td>10-band equalizer with presets</td><td>yes</td><td>yes</td></tr>
+          <tr><td>Skins, VU meters, sleep timer</td><td>yes</td><td>yes</td></tr>
+          <tr><td>PLS / JSON playlists, same format</td><td>yes</td><td>yes</td></tr>
+          <tr><td>Reconnect and watchdog</td><td>yes</td><td>yes</td></tr>
+          <tr><td>Keeps playing in the background</td><td>foreground service</td><td>system tray</td></tr>
+          <tr><td>Keyboard shortcuts and media keys</td><td>—</td><td>yes</td></tr>
+          <tr><td>Resizable window, two-column player</td><td>—</td><td>yes</td></tr>
+          <tr><td>Mouse: wheel volume, back button, drag to reorder</td><td>—</td><td>yes</td></tr>
+          <tr><td>Android Auto</td><td>certified</td><td>not applicable</td></tr>
+          <tr><td>Bluetooth media session (AVRCP)</td><td>yes</td><td>—</td></tr>
+          <tr><td>Wi-Fi → mobile data fallback</td><td>yes</td><td>not applicable</td></tr>
+          <tr><td>Chromecast / TV</td><td>yes</td><td>—</td></tr>
+          <tr><td>Distribution</td><td>Google Play</td><td>installer from GitHub, with SHA-256</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<div class="verdict-box">
+  <div style="font-size:30px;margin-bottom:12px;">🪟</div>
+  <h3>Want to try it?</h3>
+  <p>Free, no ads, no tracking. Windows 10/11 x64, one installer, your playlists stay yours.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+    <a href="index.html#download" class="btn btn-primary">⬇ Download</a>
+    <a href="https://toevi.github.io/RadioAndroidPro/" class="btn btn-ghost" target="_blank">📱 Android version</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">App page</a>
+    <a href="https://toevi.github.io/RadioAndroidPro/" target="_blank">Android version</a>
+    <a href="mailto:tomek.maselko@gmail.com">Email</a>
+    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/PRIVACY.md" target="_blank">Privacy Policy</a>
+    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/EULA.txt" target="_blank">Licence (EULA)</a>
+    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/issues" target="_blank">Report a problem</a>
+  </div>
+  <div class="footer-copy">© 2026 Tomasz Masłowski · VLC, LibVLC and VideoLAN are trademarks of the VideoLAN organisation</div>
+</footer>
+
+</body>
+</html>
