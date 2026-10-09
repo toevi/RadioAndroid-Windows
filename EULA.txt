@@ -1,9 +1,6 @@
 ﻿RadioAndroid for Windows - END USER LICENSE AGREEMENT
 
-*** DRAFT 2026-09-13 - NOT IN FORCE UNTIL APPROVED BY THE LICENSOR ***
-*** Items marked [DECISION] must be settled before release. ***
-
-Version: 1.0 (draft)
+Version: 1.0 (2026-10-09)
 Licensor: Tomasz Masłowski (tmfgroup), contact: tomek.maselko@gmail.com
 
 PLEASE READ THIS AGREEMENT CAREFULLY. The installer asks you to accept it before
@@ -29,8 +26,9 @@ use on computers you own or control.
 Except where section 6 or mandatory law allows it, you may not:
   a) sell the Software or its installer, or charge any fee for it or for access to it;
      distribute, publish, rent or lend them;
-     the only authorised source is the official project page
-     (https://toevi.github.io/RadioAndroidPro/);
+     the only authorised source is the official release page
+     (https://github.com/toevi/RadioAndroid-Windows-Release/releases),
+     linked from the project page (https://toevi.github.io/RadioAndroidPro/);
   b) modify, decompile or reverse engineer the Software, or create derivative works;
   c) remove or alter copyright, license or attribution notices.
 
@@ -43,8 +41,10 @@ Licensor. The names "RadioAndroid" and "RadioAndroid for Windows" belong to the 
 
 5. RADIO STATIONS AND THIRD-PARTY SERVICES
 
-The Software is a player. It does not include, host, select or control any radio station.
-You add stations yourself and you are responsible for what you listen to and for
+The Software is a player and hosts no radio station of its own. On first start it adds a
+few example stations (SomaFM channels and France Musique), whose broadcasters make these
+streams publicly available; you may delete them. All other stations you add yourself, and
+you are responsible for what you listen to and for
 respecting copyright and broadcasting rules in your country. Station servers and the
 online services the Software uses to show cover art and logos (Apple iTunes Search,
 Deezer, radio-browser.info, Wikimedia, AudioAddict) are operated by third parties under
@@ -112,7 +112,8 @@ by uninstalling the Software.
 
 This agreement is governed by the law of the Republic of Poland. If you are a consumer,
 you keep the protection of the mandatory laws of the country where you live.
-[DECISION: confirm; consider a short legal review before public release.]
+Any dispute goes to the court that has jurisdiction under the applicable law; a consumer
+may always bring proceedings in the country where they live.
 
 
 13. LANGUAGE
