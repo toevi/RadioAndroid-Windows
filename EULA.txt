@@ -77,7 +77,7 @@ and inside the application (Help > licenses).
 
 The Software collects no personal data and has no accounts, advertising or analytics.
 What it stores on your computer and which servers it contacts is described in the
-Privacy Policy: https://toevi.github.io/Android-Radio-privacy-policy/
+Privacy Policy: https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/PRIVACY.md
 
 
 8. UPDATES

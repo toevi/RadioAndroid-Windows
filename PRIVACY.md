@@ -1,8 +1,9 @@
 # Privacy Policy – RadioAndroid for Windows
 
-**Last updated:** 9 October 2026 · Published at
-<https://toevi.github.io/Android-Radio-privacy-policy/#windows> (the same page as the Android app's
-policy). If the two ever differ, the published page is the current one.
+**Last updated:** 9 October 2026
+
+This policy covers **RadioAndroid for Windows** only and lives with its download, in this repository.
+The Android app has its own policy: <https://toevi.github.io/Android-Radio-privacy-policy/>.
 
 RadioAndroid for Windows is the desktop version of RadioAndroid, an internet radio player for
 Windows 10 and 11. This policy explains what it does with your data. The short version is the same as
