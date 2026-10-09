@@ -23,41 +23,73 @@ Grab the newest package from **[Releases](../../releases)**. Each release has:
 
 | File | What it is |
 |---|---|
-| `RadioAndroid-for-Windows-Setup.exe` | the installer, signed with the certificate `CN=tmfgroup` |
-| `RadioAndroid-for-Windows-Setup.zip` | the same installer in a zip, for browsers that refuse to download an `.exe` |
-| `RadioAndroid-for-Windows-Setup.exe.sha256` | one line: the SHA-256 of the installer |
-| `SHA256SUMS.txt` | the SHA-256 of every file in the package (381 of them) |
+| `RadioAndroid-for-Windows-Setup.zip` | **the download** — the installer inside a zip |
+| `RadioAndroid-for-Windows-Setup.zip.sha256` | one line: the SHA-256 of the zip |
+| `SHA256SUMS.txt` | the SHA-256 of every file the installer puts on your disk |
 
-The hash of each release is also written in its release notes, so it stays in this repository's
-history.
+The hash of the zip is also written in the release notes, so it stays in this repository's history.
 
 **Requirements:** Windows 10 version 2004 (build 19041) or Windows 11, 64-bit. About 250 MB on disk.
+On the **"N" editions** of Windows (sold without media features), AAC stations need Microsoft's free
+*Media Feature Pack*; MP3 and the rest play without it.
+
+## The installer is not code-signed — on purpose
+
+A code-signing certificate from a recognised authority costs money every year, and this app is free
+and earns nothing. So the installer is **not signed**, and Windows will treat it as a file from an
+unknown publisher. That is a statement about **who paid for a certificate**, not about what is in the
+file. What protects you instead is the **SHA-256 hash**: it proves that the file you downloaded is,
+byte for byte, the one published here (see *Verifying* below). Releases in this repository are
+immutable — once published, a file cannot be swapped for another, not even by me.
 
 ## Installing
 
-1. If you took the zip: right-click it, **Properties → Unblock**, then extract. That keeps Windows
-   from flagging the installer and it starts without a warning.
-2. Windows may show a blue **"Windows protected your PC"** screen. It is not a virus warning — the app
-   is signed with my own certificate, which Microsoft does not know, and a new file has no reputation
-   yet. Click **More info → Run anyway**.
-3. The installer asks for **administrator rights once**, because it installs into
+1. **Download** the zip from Releases. If your browser says the file "isn't commonly downloaded",
+   choose **Keep** (in Edge: **… → Keep → Show more → Keep anyway**).
+2. **Unblock the zip before extracting it:** right-click it → **Properties** → tick **Unblock** at the
+   bottom → **OK**. Then extract. This removes the "downloaded from the internet" mark, and the
+   installer starts without the blue warning screen.
+3. If you skipped step 2, Windows shows a blue **"Windows protected your PC"** screen. It is not a virus
+   warning: the file is new and unsigned, so Microsoft has no reputation for it yet. Click
+   **More info → Run anyway**.
+4. Windows asks whether to let an app from an **unknown publisher** make changes — **Yes**. The
+   installer needs administrator rights once, because it installs into
    `C:\Program Files\RadioAndroid for Windows`. The app itself then runs with no special privileges.
+5. Read and **accept the licence** in the installer, then **Install**. The installer never runs
+   silently: nothing is installed without the licence page.
 
 Installing again over an existing copy updates it in place; the installer closes a running copy first,
-even when the radio is sitting in the tray.
+even when the radio is sitting in the tray. Every new version is a new file, so steps 1–4 come back
+with each update.
+
+### Windows 11: Smart App Control
+
+On some Windows 11 PCs — usually freshly installed ones — **Smart App Control** is switched on. It
+blocks unsigned programs outright: there is **no "Run anyway"** and no exception for one app. If the
+installer is blocked with a Smart App Control message:
+
+1. Open **Windows Security → App & browser control → Smart App Control settings** and select **Off**.
+2. Install the app.
+
+Since the April 2026 update for Windows 11 25H2, Smart App Control can be switched back on later
+without reinstalling Windows; on older builds, once switched off it stays off. Only do this for a file
+whose hash you have checked.
 
 ## Verifying what you downloaded
 
-Optional, and only if you care to:
+Recommended — it takes ten seconds. In PowerShell:
 
 ```powershell
-Get-FileHash "$HOME\Downloads\RadioAndroid-for-Windows-Setup.exe" -Algorithm SHA256
+Get-FileHash "$HOME\Downloads\RadioAndroid-for-Windows-Setup.zip" -Algorithm SHA256
 ```
 
-Compare the result with the hash in the release notes. A single changed byte gives a completely
-different hash, and it also breaks the signature — which you can check in **Properties → Digital
-Signatures**. The signature says the file came from me and was not modified afterwards; because the
-certificate is self-signed, Windows will call the root untrusted, and that is expected.
+Compare the result with the hash in the release notes, character by character. A single changed byte
+gives a completely different hash. If it does not match, **do not run the file** — download it again
+from this page and tell me.
+
+The hash proves the file is the one published here; this page, served by GitHub over HTTPS, is what
+proves where it came from. The installer carries **no digital signature**, so **Properties → Digital
+Signatures** has nothing to show — that is expected.
 
 ## What it does
 
@@ -72,7 +104,10 @@ certificate is self-signed, Windows will call the root untrusted, and that is ex
 - Closing the window with **X** only hides it — the radio keeps playing and is controlled from the
   tray. **Exit** in the tray menu really quits. This is deliberate, the same as on the phone.
 
-**Stations are yours to add** — nothing is preloaded, and the app hosts nothing.
+**Stations are yours to add.** On first start the list holds six examples — five SomaFM channels
+(a listener-supported broadcaster that invites apps to use its streams) and France Musique (Radio
+France, an HLS stream) — so there is something to play straight away. Delete them freely. The app
+hosts no streams of its own.
 
 ## What it does not do
 
