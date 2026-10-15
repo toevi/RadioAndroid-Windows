@@ -1,12 +1,12 @@
 # Privacy Policy – RadioAndroid for Windows
 
-**Last updated:** 9 October 2026
+**Last updated:** 15 October 2026
 
 This policy covers **RadioAndroid for Windows** only and lives with its download, in this repository.
 The Android app has its own policy: <https://toevi.github.io/Android-Radio-privacy-policy/>.
 
 RadioAndroid for Windows is the desktop version of RadioAndroid, an internet radio player for
-Windows 10 and 11. This policy explains what it does with your data. The short version is the same as
+Windows 11. This policy explains what it does with your data. The short version is the same as
 on the phone: **the app does not collect, store or share any personal data, and it has no user
 accounts, no advertising and no analytics.**
 
@@ -70,6 +70,9 @@ those sites' own policies.
   so that media keys, the volume flyout and the lock screen can show and control playback. This stays
   on your computer and its connected devices; nothing is sent to the developer.
 - **Notification area.** The tray icon's tooltip shows the station and the track.
+- **VU meter.** To show the real level of the music, the app asks Windows for a copy of the sound
+  **it plays itself** - only its own audio, never other programs and never the microphone - and
+  measures it in memory, a fraction of a second at a time. Nothing is recorded, saved or sent anywhere.
 - **No special permissions.** The installer asks for administrator rights once, to install the program
   into `Program Files`. The app itself runs as your normal Windows user, installs no service and does
   not start with Windows. It does not access your location, contacts, camera, microphone, or files

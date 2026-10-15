@@ -1,6 +1,6 @@
 # RadioAndroid for Windows
 
-Internet radio for Windows 10 and 11 — a desktop port of **RadioAndroid** for Android. One engine
+Internet radio for Windows 11 — a desktop port of **RadioAndroid** for Android. One engine
 (libvlc), your own station list, a 10-band equalizer, ICY metadata with cover art, skins and a VU
 meter, a sleep timer, a tray icon and media keys.
 
@@ -19,7 +19,9 @@ meter, a sleep timer, a tray icon and media keys.
 
 ## Download
 
-Grab the newest package from **[Releases](../../releases)**. Each release has:
+Grab the package from **[Releases](../../releases)**. There is always **exactly one release** there:
+each new version replaces the previous one, and installing it over an older copy updates that copy in
+place. The release has:
 
 | File | What it is |
 |---|---|
@@ -29,7 +31,8 @@ Grab the newest package from **[Releases](../../releases)**. Each release has:
 
 The hash of the zip is also written in the release notes, so it stays in this repository's history.
 
-**Requirements:** Windows 10 version 2004 (build 19041) or Windows 11, 64-bit. About 250 MB on disk.
+**Requirements:** Windows 11, 64-bit. About 250 MB on disk. Windows 10 is not supported: the installer
+says so and stops before installing anything.
 On the **"N" editions** of Windows (sold without media features), AAC stations need Microsoft's free
 *Media Feature Pack*; MP3 and the rest play without it.
 
@@ -95,7 +98,11 @@ Signatures** has nothing to show — that is expected.
 
 - Plays MP3/ICY, AAC and HLS streams through **libvlc**, with a reconnect loop and a watchdog that
   notices a stream that went silent without reporting an error.
-- **10-band equalizer** with your own presets, a **VU meter** and skins.
+- **10-band equalizer** with your own presets, and skins.
+- A **VU meter that measures the sound** the app plays — five bands, left and right separately, following
+  the volume like the meters of an amplifier; five styles to choose from.
+- Two **player styles**: Modern, and **Vintage** — the whole app as one piece of hi-fi equipment, with a
+  dot-matrix display, brushed-metal keys in silver or black, and two needle VU meters.
 - **ICY metadata** with cover art looked up online for the track that is playing.
 - **Sleep timer**, **tray icon** with play/stop and station switching, **media keys** and keyboard
   shortcuts (`Ctrl+P`, `Ctrl+←/→`, `Ctrl+1/2/3`, `F1`; the full list is in the app's Help).
@@ -130,7 +137,7 @@ Android Auto and no Bluetooth remote control — those parts of the phone app we
   install anything until it is accepted. Free to use, private use, not for sale or resale.
 - **[THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt)** — the components the app ships with and their
   licences: **libvlc** (LGPL-2.1), LibVLCSharp, .NET MAUI and the Community Toolkit (MIT), Material
-  Icons (Apache-2.0). Sources for libvlc: <https://www.videolan.org/vlc/> and
+  Icons (Apache-2.0), the Doto font (SIL OFL-1.1). Sources for libvlc: <https://www.videolan.org/vlc/> and
   <https://download.videolan.org/pub/videolan/vlc/>.
 - **[PRIVACY.md](PRIVACY.md)** — the privacy policy.
 

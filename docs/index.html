@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>RadioAndroid for Windows — Internet Radio for the Desktop</title>
-<meta name="description" content="RadioAndroid for Windows — the desktop port of RadioAndroid. Same C# codebase, LibVLC engine, 10-band equalizer, ICY metadata and cover art. Windows 10/11 x64."/>
+<meta name="description" content="RadioAndroid for Windows — the desktop port of RadioAndroid. Same C# codebase, LibVLC engine, 10-band equalizer, ICY metadata and cover art. Windows 11 x64."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -211,13 +211,14 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
 <!-- HERO -->
 <header class="hero">
   <span class="hero-icon">🪟</span>
-  <div class="label-small">Internet Radio for Windows 10/11</div>
+  <div class="label-small">Internet Radio for Windows 11</div>
   <h1>RadioAndroid <span>for Windows</span></h1>
   <p class="hero-sub">The desktop port of RadioAndroid. Same C# codebase, same LibVLC engine — rebuilt for a window you can resize, a system tray and a keyboard.</p>
   <div class="badges">
     <span class="badge">🎚️ 10-band equalizer</span>
     <span class="badge">🎵 ICY metadata &amp; cover art</span>
     <span class="badge">🎨 7 skins &amp; 5 VU meters</span>
+    <span class="badge">📻 Vintage hi-fi style</span>
     <span class="badge">⌨️ Keyboard &amp; media keys</span>
     <span class="badge">🔔 System tray</span>
     <span class="badge">💾 PLS / JSON playlists</span>
@@ -265,7 +266,13 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
     <div class="feature-card">
       <div class="f-icon">🎨</div>
       <h3>Skins and VU meters</h3>
-      <p>Seven backgrounds plus your own custom colours, five VU meter styles, and Light / Dark / Auto for the bars — Auto takes its colours from the skin.</p>
+      <p>Seven backgrounds plus your own custom colours, five VU meter styles, and Light / Dark / Auto for the bars — Auto takes its colours from the skin. The VU meter measures the sound the app plays: five bands, left and right, following the volume.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="f-icon">📻</div>
+      <h3>Vintage style</h3>
+      <p>The whole app as one piece of hi-fi equipment: a dot-matrix display with status lamps, brushed-metal keys in silver or black, and two needle VU meters that swing with the music like an amplifier's.</p>
     </div>
 
     <div class="feature-card">
@@ -378,6 +385,25 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
     </div>
 
     <div class="screenshot-group">
+      <div class="screenshot-group-label">Vintage style</div>
+      <p class="screenshot-group-note">The same player as one piece of hi-fi equipment — the needles measure the sound the app plays.</p>
+      <div class="screenshot-grid">
+        <div class="screenshot-item">
+          <img src="14-vintage-silver.png" alt="Vintage style in brushed silver: cover in a square window, two needle VU meters, dot-matrix station display and metal keys" loading="lazy"/>
+          <p class="shot-tag">Vintage · silver</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="15-vintage-black.png" alt="Vintage style in black with gold lettering: needle VU meters and the dot-matrix display" loading="lazy"/>
+          <p class="shot-tag">Vintage · black</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="16-vintage-stacje.png" alt="Station list in the Vintage style: dot-matrix names, the playing station on dark glass, metal keys" loading="lazy"/>
+          <p class="shot-tag">Vintage · station list</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="screenshot-group">
       <div class="screenshot-group-label">Equalizer and settings</div>
       <p class="screenshot-group-note">Everything has a button — nothing is hidden behind a gesture you have to guess.</p>
       <!-- Flex, not the auto-fit grid: these two windows have very different shapes, and a grid
@@ -407,13 +433,14 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
       <div class="download-card featured">
         <div class="dc-icon">🪟</div>
         <div class="dc-title">RadioAndroid for Windows</div>
-        <div class="dc-sub">Version 0.1.5 · Windows 10/11 x64</div>
+        <div class="dc-sub">Version 0.2.0 · Windows 11 x64</div>
         <div class="dc-price">Free <span>· no account, no ads</span></div>
         <ul class="feature-list">
           <li><span class="check">✓</span> Self-contained installer — .NET 10, Windows App SDK and LibVLC included</li>
           <li><span class="check">✓</span> Installs per machine into Program Files, updates in place</li>
           <li><span class="check">✓</span> Uninstall removes the program and leaves your stations and playlists alone</li>
-          <li><span class="check">✓</span> 10-band equalizer, skins, VU meters, sleep timer</li>
+          <li><span class="check">✓</span> 10-band equalizer, skins, measuring VU meters, sleep timer</li>
+          <li><span class="check">✓</span> Modern and Vintage player styles</li>
           <li><span class="check">✓</span> ICY metadata, cover art, station logos</li>
           <li><span class="check">✓</span> System tray, keyboard shortcuts, media keys</li>
           <li><span class="check">✓</span> PLS and JSON import / export, shared with the phone app</li>
@@ -421,8 +448,8 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
         </ul>
         <a href="https://github.com/toevi/RadioAndroid-Windows-Release/releases/latest" class="btn btn-primary" target="_blank">⬇ Download from GitHub</a>
         <div class="hashbox">
-          <b>0.1.5 · RadioAndroid-for-Windows-Setup.zip · 62 MB</b><br/>
-          SHA-256 of the zip <code>8E3442BAE30ADF8BAE58D0C77F9DC004B18404FA57FA20CE31C9852A699CBE65</code><br/>
+          <b>0.2.0 · RadioAndroid-for-Windows-Setup.zip · 63 MB</b><br/>
+          SHA-256 of the zip <code>4CFACB4241A5D06320A90215B8D0C31F91D15B32446680E8D16D9C0815B68386</code><br/>
           <span style="color:#5b6a7d">Check it in PowerShell before installing:
           <code style="color:#8fa3ba">Get-FileHash RadioAndroid-for-Windows-Setup.zip</code> — the result must match
           character for character. The same hash is in the release notes on GitHub.</span>
@@ -458,7 +485,7 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
         <div class="dc-title">What it needs</div>
         <div class="dc-sub">Requirements</div>
         <ul class="feature-list" style="margin-top:14px;">
-          <li><span class="check">✓</span> Windows 10 version 2004 (build 19041) or Windows 11</li>
+          <li><span class="check">✓</span> Windows 11 (Windows 10 is not supported)</li>
           <li><span class="check">✓</span> 64-bit x64 processor</li>
           <li><span class="check">✓</span> ~250 MB of disk space</li>
           <li><span class="check">✓</span> An internet connection for the streams</li>
@@ -550,7 +577,7 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">RadioAndroid <span>for Windows</span></div>
-  <div class="footer-sub">Internet radio for Windows 10/11 · version 0.1.5</div>
+  <div class="footer-sub">Internet radio for Windows 11 · version 0.2.0</div>
   <div class="footer-links">
     <a href="https://toevi.github.io/RadioAndroidPro/" target="_blank">Android version</a>
     <a href="mailto:tomek.maselko@gmail.com">Email</a>

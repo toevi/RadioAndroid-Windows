@@ -1,6 +1,6 @@
 ﻿RadioAndroid for Windows - END USER LICENSE AGREEMENT
 
-Version: 1.0 (2026-10-09)
+Version: 1.1 (2026-10-15)
 Licensor: Tomasz Masłowski (tmfgroup), contact: tomek.maselko@gmail.com
 
 PLEASE READ THIS AGREEMENT CAREFULLY. The installer asks you to accept it before
@@ -65,6 +65,7 @@ license, and nothing in this agreement limits the rights those licenses give you
   - Opus, Vorbis, FLAC, Speex - BSD-style licenses; libxml2 - MIT license.
   - .NET runtime, .NET MAUI, Windows App SDK - MIT license.
   - Material Icons - Apache License 2.0.
+  - Doto font - SIL Open Font License 1.1.
 
 For the LGPL components you are expressly allowed to modify them, to replace the LGPL
 libraries shipped with the Software with modified versions, and to reverse engineer the
