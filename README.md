@@ -141,8 +141,10 @@ Android Auto and no Bluetooth remote control — those parts of the phone app we
   <https://download.videolan.org/pub/videolan/vlc/>.
 - **[PRIVACY.md](PRIVACY.md)** — the privacy policy.
 
-The app is free. If you like it, there are two links inside it for buying me a coffee — entirely
-optional, and nothing in the app depends on it.
+The app is free. It contains no payment links of any kind: if you would like to support it, the
+project website (<https://toevi.github.io/RadioAndroidPro/>, also linked from the app's Help and side
+panel) shows how — entirely optional, and nothing in the app depends on it. A copy of the app that asks
+you to pay or donate inside it is not from here.
 
 ## Reporting a problem
 

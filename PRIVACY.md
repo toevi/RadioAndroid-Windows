@@ -60,8 +60,7 @@ from section 9. This description is the same for everyone and carries nothing th
 
 The app opens web pages in your own browser **only when you click a link**: the project page
 (`toevi.github.io/RadioAndroidPro`), the station directory `fmstream.org`, Google Play (the Android
-version), the voluntary donation pages `buycoffee.to` and `buymeacoffee.com`, and the source-code pages
-of the open-source components named in the app's licence information. What happens there is covered by
+version), and the source-code pages of the open-source components named in the app's licence information. What happens there is covered by
 those sites' own policies.
 
 ## 4. Windows integration
