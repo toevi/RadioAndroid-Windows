@@ -1,0 +1,4 @@
+# RadioAndroid for Windows - the release signing key (ed25519, fingerprint SHA256:ufA0Z2DZPe24hYEd4b+RrHnAwqs2AgCb7+PjB+uC4pI)
+# Files: ssh-keygen -Y verify -f allowed_signers -I radioandroid-windows@tmfgroup -n file -s <file>.sig < <file>
+# Release tags: git verify-tag <tag> (with gpg.ssh.allowedSignersFile pointing here)
+radioandroid-windows@tmfgroup,tomek.maselko@gmail.com namespaces="file,git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBIuUQ6CTKmpglzxRjKKTtRaeUzDime3L7Ylo84ZlV9a

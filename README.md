@@ -28,6 +28,7 @@ place. The release has:
 | `RadioAndroid-for-Windows-Setup.zip` | **the download** — the installer inside a zip |
 | `RadioAndroid-for-Windows-Setup.zip.sha256` | one line: the SHA-256 of the zip |
 | `SHA256SUMS.txt` | the SHA-256 of every file the installer puts on your disk |
+| `RadioAndroid-for-Windows-Setup.zip.sig`, `SHA256SUMS.txt.sig` | my signature of the zip and of the list above (optional check, see *Verifying*) |
 
 The hash of the zip is also written in the release notes, so it stays in this repository's history.
 
@@ -91,8 +92,29 @@ gives a completely different hash. If it does not match, **do not run the file**
 from this page and tell me.
 
 The hash proves the file is the one published here; this page, served by GitHub over HTTPS, is what
-proves where it came from. The installer carries **no digital signature**, so **Properties → Digital
-Signatures** has nothing to show — that is expected.
+proves where it came from. The installer carries **no Authenticode signature** (that needs a paid
+certificate), so **Properties → Digital Signatures** has nothing to show — that is expected.
+
+### Optional: check my signature
+
+Every release is also signed with my own release key (ed25519). A copy of the app rebuilt or repacked by
+someone else cannot carry this signature, even if they publish their own hashes next to it. Windows 11
+has the tool built in. Put [`allowed_signers`](allowed_signers) next to the downloaded files, open a
+terminal in that folder and run (`cmd /c` because PowerShell has no `<` input redirection):
+
+```powershell
+cmd /c "ssh-keygen -Y verify -f allowed_signers -I radioandroid-windows@tmfgroup -n file -s RadioAndroid-for-Windows-Setup.zip.sig < RadioAndroid-for-Windows-Setup.zip"
+```
+
+The answer must be `Good "file" signature for radioandroid-windows@tmfgroup with ED25519 key
+SHA256:ufA0Z2DZPe24hYEd4b+RrHnAwqs2AgCb7+PjB+uC4pI` — the same fingerprint as on the project pages. The
+release tag in this repository is signed with the same key (GitHub shows it as *Verified*).
+
+### Virus scan
+
+Each release's notes link to its [VirusTotal](https://www.virustotal.com/) report — the zip scanned by
+some seventy antivirus engines. A brand-new unsigned file can still trip a generic "unknown file" warning
+in one or two of them; the report shows which.
 
 ## What it does
 
