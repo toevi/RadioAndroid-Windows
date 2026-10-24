@@ -1,6 +1,6 @@
 # Privacy Policy – RadioAndroid for Windows
 
-**Last updated:** 15 October 2026
+**Last updated:** 24 October 2026
 
 This policy covers **RadioAndroid for Windows** only and lives with its download, in this repository.
 The Android app has its own policy: <https://toevi.github.io/Android-Radio-privacy-policy/>.
@@ -73,8 +73,10 @@ those sites' own policies.
   **it plays itself** - only its own audio, never other programs and never the microphone - and
   measures it in memory, a fraction of a second at a time. Nothing is recorded, saved or sent anywhere.
 - **No special permissions.** The installer asks for administrator rights once, to install the program
-  into `Program Files`. The app itself runs as your normal Windows user, installs no service and does
-  not start with Windows. It does not access your location, contacts, camera, microphone, or files
+  into `Program Files`. The app itself runs as your normal Windows user and installs no service. It
+  does not start with Windows unless you turn on **Start with Windows** in Settings: then it adds one
+  entry to your own Windows startup list (shown in Task Manager under Startup apps), and turning the
+  switch off or uninstalling the app removes it. It does not access your location, contacts, camera, microphone, or files
   outside the folders listed in section 2 and the files you open yourself.
 
 ## 5. Diagnostic log

@@ -140,7 +140,8 @@ hosts no streams of its own.
 
 ## What it does not do
 
-No autostart, no background service, no telemetry, no analytics, no accounts, no advertising. It
+No autostart unless you switch it on (Settings → Start with Windows), no background service, no
+telemetry, no analytics, no accounts, no advertising. It
 writes **no log file** unless you ask for one. Nothing is uploaded anywhere: the only connections it
 makes are to the stations you add and to the public catalogues it uses to find cover art. There is no
 Android Auto and no Bluetooth remote control — those parts of the phone app were deliberately left out.
