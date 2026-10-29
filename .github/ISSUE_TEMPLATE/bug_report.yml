@@ -1,5 +1,5 @@
 name: Something does not work
-description: A station will not play, the app misbehaves, the installer fails…
+description: A station will not play, the app misbehaves, installing from the Store fails…
 labels: ["bug"]
 body:
   - type: markdown
