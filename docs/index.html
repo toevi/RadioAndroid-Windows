@@ -182,6 +182,29 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
   .screenshots-section, .download-section { padding:52px 20px; }
   .nav-links { gap:12px; }
 }
+/* ── live VU meters over the Vintage screenshot (vu-live.js) ── */
+.vu-showcase { max-width:340px; margin:4px auto 10px; }
+.vu-photo { position:relative; border-radius:12px; overflow:hidden; border:3px solid #0b0c0d; box-shadow:0 6px 18px rgba(0,0,0,0.5); }
+.vu-photo img { display:block; width:100%; height:auto; }
+.vu-photo .shot-silver, .vu-showcase[data-shown="silver"] .shot-black { display:none; }
+.vu-showcase[data-shown="silver"] .shot-silver { display:block; }
+/* face boxes measured on the 466x1093 screenshots: 208x68 at x 21 / 237, y 677 (covers the photo face incl. its top numbers) */
+.vu-face { position:absolute; top:61.940%; height:6.221%; width:44.635%; }
+.vu-face.l { left:4.506%; }
+.vu-face.r { left:50.858%; }
+.vu-face svg { display:block; width:100%; height:100%; }
+.vu-face .peak { fill:#7A3A2C; transition:fill .08s; }
+.vu-face .glow { opacity:0; transition:opacity .08s; }
+.vu-peak .vu-face .peak { fill:#FF3B20; }
+.vu-peak .vu-face .glow { opacity:1; }
+.vu-ctrl { display:flex; align-items:center; gap:8px; margin-top:10px; }
+.vu-ctrl button { font-family:var(--mono); font-size:11px; padding:5px 10px; border-radius:6px; cursor:pointer;
+  border:1px solid rgba(76,194,255,0.3); background:rgba(255,255,255,0.04); color:#9fb0c4; }
+.vu-ctrl button[aria-pressed="true"] { border-color:var(--accent); color:var(--accent); }
+.vu-range { flex:1; min-width:0; accent-color:#d4a24a; }
+.vu-read { font-family:var(--mono); font-size:13px; color:var(--accent); min-width:20px; text-align:right; }
+.vu-showcase-cap { text-align:center; font-family:var(--mono); font-size:11px; color:var(--muted); margin:6px auto 26px; max-width:340px; }
+.vu-showcase-cap strong { color:var(--accent); }
 </style>
 </head>
 <body>
@@ -214,6 +237,20 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
   <div class="label-small">Internet Radio for Windows 11</div>
   <h1>RadioAndroid <span>for Windows</span></h1>
   <p class="hero-sub">The desktop port of RadioAndroid. Same C# codebase, same LibVLC engine — rebuilt for a window you can resize, a system tray and a keyboard.</p>
+  <div class="vu-showcase" data-shown="black" translate="no">
+    <div class="vu-photo">
+      <img class="shot-black" src="15-vintage-black.png" width="466" height="1093" alt="Vintage player style, black, with the two needle VU meters moving"/>
+      <img class="shot-silver" src="14-vintage-silver.png" width="466" height="1093" alt="Vintage player style, silver, with the two needle VU meters moving"/>
+    </div>
+    <div class="vu-ctrl">
+      <button type="button" data-finish="black" aria-pressed="true">Black</button>
+      <button type="button" data-finish="silver" aria-pressed="false">Silver</button>
+      <button type="button" class="vu-auto" aria-pressed="true">Auto</button>
+      <input type="range" class="vu-range" min="0" max="20" step="0.5" value="11" aria-label="VU meter preview level"/>
+      <output class="vu-read">11</output>
+    </div>
+  </div>
+  <p class="vu-showcase-cap"><strong>Vintage player.</strong> In the app the needles measure the sound it plays — here they only move like music. Drag the slider to try them, AUTO to let them play.</p>
   <div class="badges">
     <span class="badge">🎚️ 10-band equalizer</span>
     <span class="badge">🎵 ICY metadata &amp; cover art</span>
@@ -577,5 +614,6 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
   <div class="footer-copy">© 2026 Tomasz Masłowski · VLC, LibVLC and VideoLAN are trademarks of the VideoLAN organisation</div>
 </footer>
 
+<script src="vu-live.js?v=1"></script>
 </body>
 </html>
