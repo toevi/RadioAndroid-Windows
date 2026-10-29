@@ -14,6 +14,25 @@ the real sound, and a classic hi-fi look called **Vintage**. Free, no account, n
 RadioAndroid for Windows is distributed **only through the Microsoft Store**. A copy from anywhere else
 may have been altered. Website: <https://toevi.github.io/RadioAndroid-Windows/>
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/17-vintage-szerokie.jpg" alt="Vintage player style in black across a wide window: cover, needle VU meters, dot-matrix display" width="820">
+</p>
+
+<p align="center">
+  <img src="docs/15-vintage-black.png" alt="Vintage player, black" width="200">
+  <img src="docs/14-vintage-silver.png" alt="Vintage player, silver" width="200">
+  <img src="docs/01-player-waskie.jpg" alt="Modern player at phone width with a bar VU meter" width="200">
+  <img src="docs/16-vintage-stacje.png" alt="Station grid in the Vintage style" width="200">
+</p>
+
+<p align="center">
+  <img src="docs/10-player-szerokie.jpg" alt="Modern player in a wide window: cover on the left, VU meter and controls on the right" width="820">
+</p>
+
+More on the website: <https://toevi.github.io/RadioAndroid-Windows/#screenshots>
+
 ## What it is for
 
 Listening to internet radio on a PC the way you listen on the phone: you add the stations you like by
