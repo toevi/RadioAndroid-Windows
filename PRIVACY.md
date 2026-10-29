@@ -1,6 +1,6 @@
 # Privacy Policy – RadioAndroid for Windows
 
-**Last updated:** [DATE OF PUBLICATION] — DRAFT 29 October 2026 for the Microsoft Store edition, not yet approved
+**Last updated:** 29 October 2026
 
 This policy covers **RadioAndroid for Windows**, distributed through the Microsoft Store, and lives on the
 app's page: <https://toevi.github.io/RadioAndroid-Windows/>.
