@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>RadioAndroid for Windows — Technical Details</title>
-<meta name="description" content="How the Windows port of RadioAndroid works: one LibVLC engine, the watchdog that watches audio buffers, the equalizer, the installer, and an honest list of what it cannot do."/>
+<meta name="description" content="How the Windows port of RadioAndroid works: one LibVLC engine, the watchdog that watches audio buffers, the equalizer, the Store package, and an honest list of what it cannot do."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -107,7 +107,7 @@ footer { padding:40px 28px; text-align:center; }
     <a href="#engine">Engine</a>
     <a href="#stability">Stability</a>
     <a href="#eq">Equalizer</a>
-    <a href="#install">Installer</a>
+    <a href="#install">Package</a>
     <a href="#privacy">Privacy</a>
     <a href="#procon">Pros &amp; Cons</a>
     <a href="index.html">← App page</a>
@@ -118,12 +118,12 @@ footer { padding:40px 28px; text-align:center; }
   <div class="hero-glow"></div>
   <div class="hero-kicker">Technical Overview · September 2026</div>
   <h1>RadioAndroid <em>for Windows</em></h1>
-  <p class="hero-sub">How the desktop port actually works — the engine, the failure handling, the installer, and the things it deliberately does not do. Written for people who want to know before they install. <strong style="color:#ddd">You decide.</strong></p>
+  <p class="hero-sub">How the desktop port actually works — the engine, the failure handling, the package, and the things it deliberately does not do. Written for people who want to know before they install. <strong style="color:#ddd">You decide.</strong></p>
   <div class="hero-tags">
     <span class="htag hi">One engine: LibVLC 3.0.23</span>
     <span class="htag hi">C# 13 / .NET 10</span>
     <span class="htag hi">MAUI on WinUI 3</span>
-    <span class="htag hi">Self-contained installer</span>
+    <span class="htag hi">Microsoft Store</span>
     <span class="htag">No telemetry</span>
     <span class="htag">No ads · no account</span>
   </div>
@@ -248,45 +248,30 @@ footer { padding:40px 28px; text-align:center; }
   </div>
 </section>
 
-<!-- INSTALLER -->
+<!-- PACKAGE -->
 <section class="sec" id="install">
   <div class="sec-kicker">The package</div>
-  <div class="sec-title">One installer, <em>nothing to install first</em></div>
+  <div class="sec-title">From the Microsoft Store, <em>nothing to install first</em></div>
   <p class="sec-desc">
     Self-contained: .NET 10, the Windows App SDK and LibVLC all travel inside the package. No runtime to fetch,
-    no framework to match, no store account. About 250 MB on disk after installation, from a 62.5 MB installer.
+    no framework to match. The Microsoft Store is the only place to get it.
   </p>
   <div class="cards">
     <div class="card">
-      <div class="c-icon">🏢</div>
-      <h4>Per machine, in Program Files</h4>
-      <p>Installs for everyone on the computer, asks for elevation once, and updates in place — the same entry in Apps &amp; features, not a second copy beside the first.</p>
-    </div>
-    <div class="card">
-      <div class="c-icon">🔓</div>
-      <h4>Not code-signed — on purpose</h4>
-      <p>A certificate from a recognised authority costs money every year, and this app earns nothing. A self-signed one would change nothing on your PC: Windows would still say "unknown publisher". So the installer is unsigned, and what proves the file is the one published is its <strong>SHA-256</strong>, given on the app page and in the release notes. Releases on GitHub are immutable — a published file cannot be swapped.</p>
-      <div class="c-tag">SHA-256 · immutable releases</div>
+      <div class="c-icon">🛍</div>
+      <h4>Installed and signed by the Store</h4>
+      <p>The Store checks and signs the package, installs it for your Windows account without administrator rights, and delivers every update. A copy from anywhere else may have been altered.</p>
+      <div class="c-tag">Microsoft Store</div>
     </div>
     <div class="card">
       <div class="c-icon">🧹</div>
-      <h4>Uninstall leaves your files</h4>
-      <p>Removing the app takes the program folder with it, including the copy that sits in the tray. Your playlists, equalizer presets and skins live in Documents and are never touched.</p>
-    </div>
-    <div class="card">
-      <div class="c-icon">🔄</div>
-      <h4>Updating over an older copy</h4>
-      <p>The setup closes a running copy first — including one from the very first release, which carried a different file name. Tested by installing the old build, leaving the radio playing and upgrading it for real.</p>
+      <h4>Uninstall is complete</h4>
+      <p>Removing the app also removes its station list, settings and cache. Save your stations as a playlist first (PLS tab) — playlists, equalizer presets and skins in Documents are never touched.</p>
     </div>
     <div class="card">
       <div class="c-icon">🚫</div>
-      <h4>No background updater</h4>
-      <p>Nothing runs at boot, nothing phones home to look for a new version. When there is one, you get a link.</p>
-    </div>
-    <div class="card">
-      <div class="c-icon">🧾</div>
-      <h4>Checksums published</h4>
-      <p>Every release ships with the SHA-256 of the zip you download, plus a list of checksums for all 381 files the installer puts on your disk.</p>
+      <h4>No background service</h4>
+      <p>Nothing runs at sign-in unless you switch on <em>Start with Windows</em>, and nothing phones home. Updates come through the Store.</p>
     </div>
   </div>
 </section>
@@ -299,7 +284,7 @@ footer { padding:40px 28px; text-align:center; }
     The app connects to the stations you choose, to iTunes or Deezer to look up the cover of the track that is
     playing, and to radio-browser.info or AudioAddict to find a station's logo. Nothing else: no analytics,
     no crash reporting service, no account, no ads. The full list is in the
-    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/PRIVACY.md" target="_blank">privacy policy</a>.
+    <a href="https://github.com/toevi/RadioAndroid-Windows/blob/master/PRIVACY.md" target="_blank">privacy policy</a>.
   </p>
   <div class="cards">
     <div class="card">
@@ -334,7 +319,7 @@ footer { padding:40px 28px; text-align:center; }
       <div class="pc-row"><span class="mark">🪟</span><div class="txt"><strong>Behaves like a desktop program</strong><small>Resizable window, two-column player, system tray, keyboard shortcuts, media keys, mouse back button</small></div></div>
       <div class="pc-row"><span class="mark">🎚️</span><div class="txt"><strong>Equalizer inside the audio pipeline</strong><small>Works on every format, presets shared with the phone version</small></div></div>
       <div class="pc-row"><span class="mark">💾</span><div class="txt"><strong>Files you can read</strong><small>Playlists in PLS and JSON, in Documents, portable between the phone and the desktop</small></div></div>
-      <div class="pc-row"><span class="mark">📦</span><div class="txt"><strong>Self-contained installer</strong><small>No runtime to install first, no store, no background updater</small></div></div>
+      <div class="pc-row"><span class="mark">📦</span><div class="txt"><strong>From the Microsoft Store</strong><small>No runtime to install first, no administrator rights, updates through the Store</small></div></div>
       <div class="pc-row"><span class="mark">🤫</span><div class="txt"><strong>No telemetry at all</strong><small>No analytics, no crash service, no account; the diagnostic log is off unless you turn it on</small></div></div>
       <div class="pc-row"><span class="mark">🎨</span><div class="txt"><strong>Skins and VU meters</strong><small>Seven backgrounds plus custom colours, five measuring VU styles, a Vintage hi-fi style with needle meters</small></div></div>
       <div class="pc-row"><span class="mark">🆓</span><div class="txt"><strong>Free, no ads</strong><small>Nothing is sold, nothing is shown, nothing is tracked</small></div></div>
@@ -342,8 +327,8 @@ footer { padding:40px 28px; text-align:center; }
 
     <div class="pc-table">
       <div class="pc-head con"><span>⚠️</span> Limitations</div>
-      <div class="pc-row"><span class="mark">🧪</span><div class="txt"><strong>A young port</strong><small>Version 0.2.0 — expect rough edges, and please report them on GitHub</small></div></div>
-      <div class="pc-row"><span class="mark">🔓</span><div class="txt"><strong>SmartScreen will warn</strong><small>The installer is not code-signed, so Windows shows the blue "unrecognised app" screen unless you unblock the zip first; Smart App Control blocks it outright</small></div></div>
+      <div class="pc-row"><span class="mark">🧪</span><div class="txt"><strong>A young port</strong><small>Expect rough edges, and please report them on GitHub</small></div></div>
+      <div class="pc-row"><span class="mark">🧹</span><div class="txt"><strong>Uninstall removes your station list</strong><small>Save it as a PLS playlist first; Documents stays untouched</small></div></div>
       <div class="pc-row"><span class="mark">💻</span><div class="txt"><strong>x64 only</strong><small>No ARM64 build for Snapdragon laptops, and no 32-bit build</small></div></div>
       <div class="pc-row"><span class="mark">🔍</span><div class="txt"><strong>No built-in station catalogue</strong><small>Six example stations to start with; the rest you add yourself, import from a playlist or find through fmstream.org in your browser</small></div></div>
       <div class="pc-row"><span class="mark">☁️</span><div class="txt"><strong>No cloud sync</strong><small>Playlists live on the machine; moving them is a file copy</small></div></div>
@@ -374,7 +359,7 @@ footer { padding:40px 28px; text-align:center; }
           <tr><td>Bluetooth media session (AVRCP)</td><td>yes</td><td>—</td></tr>
           <tr><td>Wi-Fi → mobile data fallback</td><td>yes</td><td>not applicable</td></tr>
           <tr><td>Chromecast / TV</td><td>yes</td><td>—</td></tr>
-          <tr><td>Distribution</td><td>Google Play</td><td>installer from GitHub, with SHA-256</td></tr>
+          <tr><td>Distribution</td><td>Google Play</td><td>Microsoft Store</td></tr>
         </tbody>
       </table>
     </div>
@@ -386,9 +371,9 @@ footer { padding:40px 28px; text-align:center; }
 <div class="verdict-box">
   <div style="font-size:30px;margin-bottom:12px;">🪟</div>
   <h3>Want to try it?</h3>
-  <p>Free, no ads, no tracking. Windows 11 x64, one installer, your playlists stay yours.</p>
+  <p>Free, no ads, no tracking. Windows 11 x64, from the Microsoft Store, your playlists stay yours.</p>
   <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-    <a href="index.html#download" class="btn btn-primary">⬇ Download</a>
+    <a href="index.html#download" class="btn btn-primary">🛍 Get it — coming soon</a>
     <a href="https://toevi.github.io/RadioAndroidPro/" class="btn btn-ghost" target="_blank">📱 Android version</a>
   </div>
 </div>
@@ -398,9 +383,8 @@ footer { padding:40px 28px; text-align:center; }
     <a href="index.html">App page</a>
     <a href="https://toevi.github.io/RadioAndroidPro/" target="_blank">Android version</a>
     <a href="mailto:tomek.maselko@gmail.com">Email</a>
-    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/PRIVACY.md" target="_blank">Privacy Policy</a>
-    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/EULA.txt" target="_blank">Licence (EULA)</a>
-    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/issues" target="_blank">Report a problem</a>
+    <a href="https://github.com/toevi/RadioAndroid-Windows/blob/master/PRIVACY.md" target="_blank">Privacy Policy</a>
+    <a href="https://github.com/toevi/RadioAndroid-Windows/issues" target="_blank">Report a problem</a>
   </div>
   <div class="footer-copy">© 2026 Tomasz Masłowski · VLC, LibVLC and VideoLAN are trademarks of the VideoLAN organisation</div>
 </footer>

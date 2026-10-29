@@ -222,11 +222,11 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
     <span class="badge">⌨️ Keyboard &amp; media keys</span>
     <span class="badge">🔔 System tray</span>
     <span class="badge">💾 PLS / JSON playlists</span>
-    <span class="badge">🧩 Single self-contained installer</span>
+    <span class="badge">🛍 Microsoft Store</span>
     <span class="badge">🆓 Free</span>
   </div>
   <div class="hero-cta">
-    <a href="#download" class="btn btn-primary">⬇ Download</a>
+    <a href="#download" class="btn btn-primary">🛍 Get it — coming soon</a>
     <a href="#screenshots" class="btn btn-ghost">🖼 See it running</a>
     <a href="details.html" class="btn btn-ghost" style="border-color:rgba(76,194,255,0.35);color:var(--accent);">🔬 Technical details</a>
     <a href="https://toevi.github.io/RadioAndroidPro/" class="btn btn-ghost" target="_blank">📱 Android version</a>
@@ -313,8 +313,8 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
 
     <div class="feature-card">
       <div class="f-icon">📦</div>
-      <h3>One installer, nothing else</h3>
-      <p>Self-contained: .NET, the Windows App SDK and LibVLC are all in the package. No runtime to install first, no store account, no background updater.</p>
+      <h3>From the Microsoft Store</h3>
+      <p>Self-contained: .NET, the Windows App SDK and LibVLC are all in the package. The Store installs it for your account without administrator rights and keeps it up to date.</p>
     </div>
 
   </div>
@@ -433,54 +433,32 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
       <div class="download-card featured">
         <div class="dc-icon">🪟</div>
         <div class="dc-title">RadioAndroid for Windows</div>
-        <div class="dc-sub">Version 0.2.0 · Windows 11 x64</div>
+        <div class="dc-sub">Windows 11 x64 · Microsoft Store</div>
         <div class="dc-price">Free <span>· no account, no ads</span></div>
         <ul class="feature-list">
-          <li><span class="check">✓</span> Self-contained installer — .NET 10, Windows App SDK and LibVLC included</li>
-          <li><span class="check">✓</span> Installs per machine into Program Files, updates in place</li>
-          <li><span class="check">✓</span> Uninstall removes the program and leaves your stations and playlists alone</li>
+          <li><span class="check">✓</span> Installs and updates through the Microsoft Store — no installer to download</li>
           <li><span class="check">✓</span> 10-band equalizer, skins, measuring VU meters, sleep timer</li>
           <li><span class="check">✓</span> Modern and Vintage player styles</li>
           <li><span class="check">✓</span> ICY metadata, cover art, station logos</li>
           <li><span class="check">✓</span> System tray, keyboard shortcuts, media keys</li>
           <li><span class="check">✓</span> PLS and JSON import / export, shared with the phone app</li>
-          <li><span class="dim">—</span> <span style="color:#5b6a7d">Not code-signed — on purpose, see below</span></li>
         </ul>
-        <a href="https://github.com/toevi/RadioAndroid-Windows-Release/releases/latest" class="btn btn-primary" target="_blank">⬇ Download from GitHub</a>
-        <div class="hashbox">
-          <b>0.2.0 · RadioAndroid-for-Windows-Setup.zip · 63 MB</b><br/>
-          SHA-256 of the zip <code>0F61F8EA8772B3094698DD3C64CCE59FF7341B4C47708243E75DBFCBDC346F7C</code><br/>
-          <span style="color:#5b6a7d">Check it in PowerShell before installing:
-          <code style="color:#8fa3ba">Get-FileHash RadioAndroid-for-Windows-Setup.zip</code> — the result must match
-          character for character. The same hash is in the release notes on GitHub.</span><br/>
-          <span style="color:#5b6a7d">Every release is also signed with my release key (ed25519) — fingerprint
-          <code style="color:#8fa3ba">SHA256:ufA0Z2DZPe24hYEd4b+RrHnAwqs2AgCb7+PjB+uC4pI</code>. How to check it, and the
-          VirusTotal report, are in the README and the release notes on GitHub.</span>
-        </div>
+        <span class="btn btn-primary" style="opacity:0.75;cursor:default;">🛍 Coming soon to the Microsoft Store</span>
+        <p style="color:#5b6a7d;font-size:0.85rem;margin-top:12px;">
+          The Microsoft Store will be the only place to get the Windows app. A copy from anywhere else may
+          have been altered.
+        </p>
       </div>
 
       <div class="download-card">
-        <div class="dc-icon">🔓</div>
-        <div class="dc-title">Not code-signed — on purpose</div>
-        <div class="dc-sub">How to install it</div>
-        <p style="color:#9fb0c4;font-size:0.92rem;margin:12px 0 4px;">
-          A code-signing certificate costs money every year, and this app is free and earns nothing. So
-          Windows treats the installer as coming from an <em>unknown publisher</em>. That says who paid for
-          a certificate, not what is in the file — the SHA-256 above is what proves the file is the one
-          published here.
+        <div class="dc-icon">📱</div>
+        <div class="dc-title">RadioAndroid for Android</div>
+        <div class="dc-sub">Phone, tablet, Android Auto</div>
+        <p style="color:#9fb0c4;font-size:0.92rem;margin:12px 0 14px;">
+          The original app, with Android Auto and Bluetooth control. Playlists, equalizer presets and skins
+          move between the phone and the PC in both directions.
         </p>
-        <ul class="feature-list" style="margin-top:12px;">
-          <li><span class="check">1</span> <span>Download the zip. If the browser says it "isn't commonly downloaded", choose <b>Keep</b>.</span></li>
-          <li><span class="check">2</span> <span>Right-click the zip → <b>Properties</b> → tick <b>Unblock</b> → OK. Then extract it.</span></li>
-          <li><span class="check">3</span> <span>If you skipped step 2: on the blue <b>"Windows protected your PC"</b> screen click <b>More info → Run anyway</b>.</span></li>
-          <li><span class="check">4</span> <span>Allow the app from an unknown publisher to make changes (<b>Yes</b>) — needed once, for Program Files.</span></li>
-          <li><span class="check">5</span> <span>Accept the licence and <b>Install</b>. Nothing installs silently.</span></li>
-        </ul>
-        <p style="color:#5b6a7d;font-size:0.85rem;margin-top:10px;">
-          Windows 11 with <b>Smart App Control</b> on blocks unsigned programs with no "Run anyway". Switch it
-          off in <i>Windows Security → App &amp; browser control → Smart App Control settings</i>, install, and
-          switch it back on if you like (possible without reinstalling since the April 2026 update of 25H2).
-        </p>
+        <a href="https://play.google.com/store/apps/details?id=com.tmfgroup.radioandroid" class="btn btn-primary" target="_blank">▶ Get it on Google Play</a>
       </div>
 
       <div class="download-card">
@@ -497,10 +475,10 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
           <li><span class="dim">—</span> <span style="color:#5b6a7d">Windows "N" editions need Microsoft's free Media Feature Pack for AAC stations</span></li>
         </ul>
         <p style="color:#5b6a7d;font-size:0.85rem;margin:6px 0 14px;">
-          Licence: <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/EULA.txt" target="_blank">EULA</a> ·
-          <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/PRIVACY.md" target="_blank">Privacy policy</a> ·
-          <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/THIRD-PARTY-NOTICES.txt" target="_blank">Third-party licences</a><br/>
-          Found a problem? <a href="https://github.com/toevi/RadioAndroid-Windows-Release/issues/new/choose" target="_blank">Report it on GitHub</a>.
+          Licence terms: shown in the Microsoft Store ·
+          <a href="https://github.com/toevi/RadioAndroid-Windows/blob/master/PRIVACY.md" target="_blank">Privacy policy</a> ·
+          <a href="https://github.com/toevi/RadioAndroid-Windows/blob/master/THIRD-PARTY-NOTICES.txt" target="_blank">Third-party licences</a><br/>
+          Found a problem? <a href="https://github.com/toevi/RadioAndroid-Windows/issues/new/choose" target="_blank">Report it on GitHub</a>.
         </p>
         <a href="https://toevi.github.io/RadioAndroidPro/" class="btn btn-ghost" target="_blank">📱 Looking for Android?</a>
       </div>
@@ -580,15 +558,14 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">RadioAndroid <span>for Windows</span></div>
-  <div class="footer-sub">Internet radio for Windows 11 · version 0.2.0</div>
+  <div class="footer-sub">Internet radio for Windows 11 · Microsoft Store</div>
   <div class="footer-links">
     <a href="https://toevi.github.io/RadioAndroidPro/" target="_blank">Android version</a>
     <a href="mailto:tomek.maselko@gmail.com">Email</a>
     <a href="https://buycoffee.to/toevi" target="_blank">buycoffee.to</a>
     <a href="https://buymeacoffee.com/toevi" target="_blank">buymeacoffee.com</a>
-    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/PRIVACY.md" target="_blank">Privacy Policy</a>
-    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/blob/master/EULA.txt" target="_blank">Licence (EULA)</a>
-    <a href="https://github.com/toevi/RadioAndroid-Windows-Release/issues" target="_blank">Report a problem</a>
+    <a href="https://github.com/toevi/RadioAndroid-Windows/blob/master/PRIVACY.md" target="_blank">Privacy Policy</a>
+    <a href="https://github.com/toevi/RadioAndroid-Windows/issues" target="_blank">Report a problem</a>
     <a href="details.html">🔬 Technical details</a>
   </div>
   <div class="footer-copy">© 2026 Tomasz Masłowski · VLC, LibVLC and VideoLAN are trademarks of the VideoLAN organisation</div>
