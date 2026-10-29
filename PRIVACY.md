@@ -56,12 +56,13 @@ their own privacy policies apply to what they do with the requests they receive.
 
 Some services require every client to name itself, so the requests carry a fixed description of the
 app: `RadioAndroid/6 (tomek.maselko@gmail.com)` for logo and station-title lookups,
-`RadioAndroid/<version> (Windows; +https://toevi.github.io/RadioAndroidPro/)` for cover lookups and
+`RadioAndroid/<version> (Windows; +https://toevi.github.io/RadioAndroid-Windows/)` for cover lookups and
 `RadioAndroid/1.0 (Windows)` for image downloads. The e-mail address is the developer's contact address
 from section 9. This description is the same for everyone and carries nothing that identifies you.
 
 The app opens web pages in your own browser **only when you click a link**: the project page
-(`toevi.github.io/RadioAndroidPro`), the station directory `fmstream.org`, Google Play (the Android
+(`toevi.github.io/RadioAndroid-Windows`), the two donation pages on the coffee page (`buycoffee.to`,
+`buymeacoffee.com` — voluntary, they unlock nothing in the app), the station directory `fmstream.org`, Google Play (the Android
 version), and the source-code pages of the open-source components named in the app's licence information. What happens there is covered by
 those sites' own policies.
 
