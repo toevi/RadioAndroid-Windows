@@ -1,19 +1,19 @@
-# Privacy Policy – RadioAndroid for Windows
+# Privacy Policy – RadioA for Windows
 
-**Last updated:** 29 October 2026
+**Last updated:** 30 October 2026
 
-This policy covers **RadioAndroid for Windows**, distributed through the Microsoft Store, and lives on the
+This policy covers **RadioA for Windows**, distributed through the Microsoft Store, and lives on the
 app's page: <https://toevi.github.io/RadioAndroid-Windows/>.
 The Android app has its own policy: <https://toevi.github.io/Android-Radio-privacy-policy/>.
 
-RadioAndroid for Windows is the desktop version of RadioAndroid, an internet radio player for
+RadioA for Windows is the desktop version of RadioAndroid, an internet radio player for
 Windows 11. This policy explains what it does with your data. The short version is the same as
 on the phone: **the app does not collect, store or share any personal data, and it has no user
 accounts, no advertising and no analytics.**
 
 ## 1. Data the app collects
 
-**None.** RadioAndroid for Windows does not collect or transmit any personal data. There are no user
+**None.** RadioA for Windows does not collect or transmit any personal data. There are no user
 accounts, no registration and no login. The app contains no advertising, analytics or crash-reporting
 component.
 
@@ -29,12 +29,14 @@ Everything the app saves stays on your computer and is never uploaded anywhere:
 | Your station list (name and stream address of each station) and your settings: equalizer, skins, VU meter mode, favourites, theme, window and list preferences | the app's own folder that Windows creates for it: `%LOCALAPPDATA%\Packages\<app package>\LocalState` |
 | Cached cover art and station logos, and a list of logo addresses already looked up | `%LOCALAPPDATA%\Packages\<app package>\LocalCache` |
 | A diagnostic log, **only if you switch it on** (see section 5) | `%LOCALAPPDATA%\Packages\<app package>\LocalCache\logs` |
-| Playlists, equalizer presets and skins you save or export, so you can copy or share them yourself | `Documents\RadioAndroid\PLS`, `EQ`, `Skins` |
+| Playlists, equalizer presets and skins you save or export, so you can copy or share them yourself | `Documents\RadioA\PLS`, `EQ`, `Skins` |
 
 **Uninstalling** removes the program **together with your station list, settings, cache and log** —
-Windows deletes the app's own folder. Playlists, equalizer presets and skins in `Documents\RadioAndroid`
+Windows deletes the app's own folder. Playlists, equalizer presets and skins in `Documents\RadioA`
 stay. To keep your stations, save them as a playlist (PLS) before uninstalling and load it again later.
-You can delete the `Documents\RadioAndroid` folder yourself at any time.
+You can delete the `Documents\RadioA` folder yourself at any time. (Earlier test versions kept these files in
+`Documents\RadioAndroid`; if that folder exists, the app renames it to `Documents\RadioA` once, on its first
+start, and changes nothing inside it.)
 
 ## 3. Internet connections the app makes
 
@@ -55,7 +57,7 @@ a song or a station. As with every internet connection, each server can see your
 their own privacy policies apply to what they do with the requests they receive.
 
 Some services require every client to name itself, so the requests carry a fixed description of the
-app: `RadioAndroid/6 (tomek.maselko@gmail.com)` for logo and station-title lookups,
+app (it still uses the project's technical name, RadioAndroid): `RadioAndroid/6 (tomek.maselko@gmail.com)` for logo and station-title lookups,
 `RadioAndroid/<version> (Windows; +https://toevi.github.io/RadioAndroid-Windows/)` for cover lookups and
 `RadioAndroid/1.0 (Windows)` for image downloads. The e-mail address is the developer's contact address
 from section 9. This description is the same for everyone and carries nothing that identifies you.
@@ -78,7 +80,7 @@ those sites' own policies.
 - **No special permissions.** The Microsoft Store installs the app for your Windows user, without
   administrator rights. It runs as a desktop app with full access to your user account (Windows calls
   this "full trust"), which it needs to run its audio engine, show the tray icon and read and write
-  your playlists in `Documents\RadioAndroid`; it installs no service. It does not start with Windows
+  your playlists in `Documents\RadioA`; it installs no service. It does not start with Windows
   unless you turn on **Start with Windows** in Settings: then Windows enables the app's startup entry
   (shown in Task Manager under Startup apps), and turning the switch off or uninstalling the app
   removes it.
@@ -90,7 +92,7 @@ those sites' own policies.
 ## 5. Diagnostic log
 
 The app writes **no log file** unless you ask for one. To help find a fault, create an empty file named
-`DIAG` in `Documents\RadioAndroid` and restart the app; from then on it writes
+`DIAG` in `Documents\RadioA` and restart the app; from then on it writes
 `radio.log` in the log folder named in section 2. Deleting `DIAG` switches logging off again at the next
 start.
 
