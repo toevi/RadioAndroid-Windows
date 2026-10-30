@@ -1,4 +1,4 @@
-# RadioAndroid for Windows
+# RadioA for Windows
 
 Internet radio for Windows 11 — the desktop edition of **RadioAndroid** for Android. Your own station
 list, a 10-band equalizer, the song that is playing with its album cover, skins, a VU meter that measures
@@ -8,10 +8,10 @@ the real sound, and a classic hi-fi look called **Vintage**. Free, no account, n
 
 | Platform | Where |
 |---|---|
-| **Windows 11** (x64) | [![Microsoft Store — coming soon](https://img.shields.io/badge/Microsoft_Store-coming_soon-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)](#get-it) |
+| **Windows 11** (x64) | [![Get it from the Microsoft Store](https://img.shields.io/badge/Microsoft_Store-get_it-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)](https://apps.microsoft.com/detail/9NJPCB908XPS) |
 | **Android** (phone, tablet, Android Auto) | [![Get it on Google Play](https://img.shields.io/badge/Google_Play-get_it-34A853?style=for-the-badge&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.tmfgroup.radioandroid) |
 
-RadioAndroid for Windows is distributed **only through the Microsoft Store**. A copy from anywhere else
+RadioA for Windows is distributed **only through the Microsoft Store**: <https://apps.microsoft.com/detail/9NJPCB908XPS>. A copy from anywhere else
 may have been altered. Website: <https://toevi.github.io/RadioAndroid-Windows/>
 
 ## Screenshots

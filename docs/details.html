@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>RadioAndroid for Windows — Technical Details</title>
+<title>RadioA for Windows — Technical Details</title>
 <meta name="description" content="How the Windows port of RadioAndroid works: one LibVLC engine, the watchdog that watches audio buffers, the equalizer, the Store package, and an honest list of what it cannot do."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
@@ -102,7 +102,7 @@ footer { padding:40px 28px; text-align:center; }
 <body>
 
 <nav>
-  <a class="nav-brand" href="index.html">RadioAndroid <em>for Windows</em></a>
+  <a class="nav-brand" href="index.html">RadioA <em>for Windows</em></a>
   <div class="nav-links">
     <a href="#engine">Engine</a>
     <a href="#stability">Stability</a>
@@ -117,7 +117,7 @@ footer { padding:40px 28px; text-align:center; }
 <header class="hero">
   <div class="hero-glow"></div>
   <div class="hero-kicker">Technical Overview · September 2026</div>
-  <h1>RadioAndroid <em>for Windows</em></h1>
+  <h1>RadioA <em>for Windows</em></h1>
   <p class="hero-sub">How the desktop port actually works — the engine, the failure handling, the package, and the things it deliberately does not do. Written for people who want to know before they install. <strong style="color:#ddd">You decide.</strong></p>
   <div class="hero-tags">
     <span class="htag hi">One engine: LibVLC 3.0.23</span>
@@ -238,7 +238,7 @@ footer { padding:40px 28px; text-align:center; }
     <div class="card">
       <div class="c-icon">💾</div>
       <h4>Presets as files</h4>
-      <p>Saved to <code>Documents\RadioAndroid\EQ</code>, loaded from there, shared with the phone version. Deleting the app never touches them.</p>
+      <p>Saved to <code>Documents\RadioA\EQ</code>, loaded from there, shared with the phone version. Deleting the app never touches them.</p>
     </div>
     <div class="card">
       <div class="c-icon">⚡</div>
@@ -290,12 +290,12 @@ footer { padding:40px 28px; text-align:center; }
     <div class="card">
       <div class="c-icon">📁</div>
       <h4>Your files, in the open</h4>
-      <p>Playlists, equalizer presets and skins you save are plain files in <code>Documents\RadioAndroid</code>, in the same formats as on the phone. Copy them across and they work. Your station list and settings stay in the app's folder under <code>%LOCALAPPDATA%</code>.</p>
+      <p>Playlists, equalizer presets and skins you save are plain files in <code>Documents\RadioA</code>, in the same formats as on the phone. Copy them across and they work. Your station list and settings stay in the app's folder under <code>%LOCALAPPDATA%</code>.</p>
     </div>
     <div class="card">
       <div class="c-icon">🪵</div>
       <h4>The log is off</h4>
-      <p>No diagnostic log is written unless you create an empty file called <code>DIAG</code> in <code>Documents\RadioAndroid</code>. It stays on your disk either way — there is nowhere for it to be sent.</p>
+      <p>No diagnostic log is written unless you create an empty file called <code>DIAG</code> in <code>Documents\RadioA</code>. It stays on your disk either way — there is nowhere for it to be sent.</p>
     </div>
     <div class="card">
       <div class="c-icon">📜</div>
