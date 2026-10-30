@@ -11,7 +11,7 @@ the real sound, and a classic hi-fi look called **Vintage**. Free, no account, n
 | **Windows 11** (x64) | [![Get it from the Microsoft Store](https://img.shields.io/badge/Microsoft_Store-get_it-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)](https://apps.microsoft.com/detail/9NJPCB908XPS) |
 | **Android** (phone, tablet, Android Auto) | [![Get it on Google Play](https://img.shields.io/badge/Google_Play-get_it-34A853?style=for-the-badge&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.tmfgroup.radioandroid) |
 
-RadioA for Windows is distributed **only through the Microsoft Store**: <https://apps.microsoft.com/detail/9NJPCB908XPS>. A copy from anywhere else
+RadioA for Windows is distributed **only through the Microsoft Store** (button above). A copy from anywhere else
 may have been altered. Website: <https://toevi.github.io/RadioAndroid-Windows/>
 
 ## Screenshots
