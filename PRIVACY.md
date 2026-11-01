@@ -89,36 +89,23 @@ those sites' own policies.
   Microsoft's own privacy statement. The app itself adds nothing to them. It does not access your location, contacts, camera, microphone, or files
   outside the folders listed in section 2 and the files you open yourself.
 
-## 5. Diagnostic log
-
-The app writes **no log file** unless you ask for one. To help find a fault, create an empty file named
-`DIAG` in `Documents\RadioA` and restart the app; from then on it writes
-`radio.log` in the log folder named in section 2. Deleting `DIAG` switches logging off again at the next
-start.
-
-When it is on, the log holds technical events (connection state, reconnects, errors), the names and
-stream addresses of the stations you play and the titles of the tracks they broadcast — that is
-listening history, which is exactly why it is off by default. The log is limited to about 5 MB; when it
-is full it is renamed to `radio.1.log` and a new one is started, so at most two files exist. It is
-**never uploaded**: you decide whether to send it to anyone. You can delete it at any time.
-
-## 6. Children
+## 5. Children
 
 The app is not directed at children and collects no data from anyone, including children.
 
-## 7. Content responsibility
+## 6. Content responsibility
 
 The developer does not host, control or curate any stream and is not responsible for the content the
 stations broadcast. On first start the app adds a few example stations (SomaFM channels and France
 Musique), whose broadcasters make these streams publicly available; you may delete them. All other
 stations you add yourself. Please respect the copyright laws in your country.
 
-## 8. Changes to this policy
+## 7. Changes to this policy
 
 If the app's features change, this Privacy Policy will be updated accordingly. The date at the top
 shows its latest version.
 
-## 9. Contact
+## 8. Contact
 
 If you have any questions about this Privacy Policy, you can contact the developer:
 
