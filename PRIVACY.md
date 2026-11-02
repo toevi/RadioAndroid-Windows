@@ -1,6 +1,6 @@
 # Privacy Policy – RadioA for Windows
 
-**Last updated:** 30 October 2026
+**Last updated:** 2 November 2026
 
 This policy covers **RadioA for Windows**, distributed through the Microsoft Store, and lives on the
 app's page: <https://toevi.github.io/RadioAndroid-Windows/>.
@@ -28,10 +28,9 @@ Everything the app saves stays on your computer and is never uploaded anywhere:
 |---|---|
 | Your station list (name and stream address of each station) and your settings: equalizer, skins, VU meter mode, favourites, theme, window and list preferences | the app's own folder that Windows creates for it: `%LOCALAPPDATA%\Packages\<app package>\LocalState` |
 | Cached cover art and station logos, and a list of logo addresses already looked up | `%LOCALAPPDATA%\Packages\<app package>\LocalCache` |
-| A diagnostic log, **only if you switch it on** (see section 5) | `%LOCALAPPDATA%\Packages\<app package>\LocalCache\logs` |
 | Playlists, equalizer presets and skins you save or export, so you can copy or share them yourself | `Documents\RadioA\PLS`, `EQ`, `Skins` |
 
-**Uninstalling** removes the program **together with your station list, settings, cache and log** —
+**Uninstalling** removes the program **together with your station list, settings and cache** —
 Windows deletes the app's own folder. Playlists, equalizer presets and skins in `Documents\RadioA`
 stay. To keep your stations, save them as a playlist (PLS) before uninstalling and load it again later.
 You can delete the `Documents\RadioA` folder yourself at any time. (Earlier test versions kept these files in
@@ -60,7 +59,7 @@ Some services require every client to name itself, so the requests carry a fixed
 app (it still uses the project's technical name, RadioAndroid): `RadioAndroid/6 (tomek.maselko@gmail.com)` for logo and station-title lookups,
 `RadioAndroid/<version> (Windows; +https://toevi.github.io/RadioAndroid-Windows/)` for cover lookups and
 `RadioAndroid/1.0 (Windows)` for image downloads. The e-mail address is the developer's contact address
-from section 9. This description is the same for everyone and carries nothing that identifies you.
+from section 8. This description is the same for everyone and carries nothing that identifies you.
 
 The app opens web pages in your own browser **only when you click a link**: the project page
 (`toevi.github.io/RadioAndroid-Windows`), the two donation pages on the coffee page (`buycoffee.to`,
