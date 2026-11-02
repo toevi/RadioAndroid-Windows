@@ -48,8 +48,8 @@ window and the radio keeps playing from the notification area.
 **Stations are yours to add.** On first start the list holds a few examples (SomaFM and France Musique)
 so there is something to play straight away. The app hosts no streams of its own.
 
-Everything technical — how the engine, the reconnect and the equalizer work — is described on the
-Android app's page: <https://toevi.github.io/RadioAndroidPro/>. The Windows edition uses the same engine
+Everything technical — how the engine, the reconnect and the equalizer work, how the three apps differ and
+which bugs each one had — is in the project's README: <https://github.com/toevi/RadioAndroidPro#readme>. The Windows edition uses the same engine
 (libvlc) and the same file formats; it leaves out what only makes sense on a phone (Android Auto,
 Bluetooth remote control). RadioA for Linux has its own page: <https://toevi.github.io/RadioA-Linux/>.
 
