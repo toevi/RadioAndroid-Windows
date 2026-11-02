@@ -35,12 +35,3 @@ body:
     attributes:
       label: Station (if it is about playback)
       description: The station's name and its stream address, if you are happy to share them.
-  - type: textarea
-    id: log
-    attributes:
-      label: Diagnostic log (optional)
-      description: |
-        Only if I ask for it, or if you want to: create an empty file named `DIAG` in
-        `Documents\RadioAndroid`, restart the app, reproduce the problem, then attach
-        `%LOCALAPPDATA%\RadioAndroid\logs\radio.log`. The log contains the stations you played and
-        the titles they broadcast — look through it before attaching. Delete `DIAG` afterwards.
