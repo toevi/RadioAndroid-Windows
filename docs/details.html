@@ -335,26 +335,26 @@ footer { padding:40px 28px; text-align:center; }
   </div>
 
   <div style="margin-top:38px;">
-    <div style="font-family:var(--mono);font-size:9px;color:var(--accent);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;">Android vs. Windows — full table</div>
+    <div style="font-family:var(--mono);font-size:9px;color:var(--accent);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;">Android, Windows and Linux — full table</div>
     <div class="tbl-wrap">
       <table class="feat">
-        <thead><tr><th>Feature</th><th>Android</th><th>Windows</th></tr></thead>
+        <thead><tr><th>Feature</th><th>Android</th><th>Windows</th><th>Linux</th></tr></thead>
         <tbody>
-          <tr><td>Audio engine</td><td>LibVLC + ExoPlayer</td><td>LibVLC only</td></tr>
-          <tr><td>ICY metadata and cover art</td><td>yes</td><td>yes</td></tr>
-          <tr><td>10-band equalizer with presets</td><td>yes</td><td>yes</td></tr>
-          <tr><td>Skins, VU meters, sleep timer</td><td>yes</td><td>yes</td></tr>
-          <tr><td>PLS / JSON playlists, same format</td><td>yes</td><td>yes</td></tr>
-          <tr><td>Reconnect and watchdog</td><td>yes</td><td>yes</td></tr>
-          <tr><td>Keeps playing in the background</td><td>foreground service</td><td>system tray</td></tr>
-          <tr><td>Keyboard shortcuts and media keys</td><td>—</td><td>yes</td></tr>
-          <tr><td>Resizable window, two-column player</td><td>—</td><td>yes</td></tr>
-          <tr><td>Mouse: wheel volume, back button, drag to reorder</td><td>—</td><td>yes</td></tr>
-          <tr><td>Android Auto</td><td>certified</td><td>not applicable</td></tr>
-          <tr><td>Bluetooth media session (AVRCP)</td><td>yes</td><td>—</td></tr>
-          <tr><td>Wi-Fi → mobile data fallback</td><td>yes</td><td>not applicable</td></tr>
-          <tr><td>Chromecast / TV</td><td>yes</td><td>—</td></tr>
-          <tr><td>Distribution</td><td>Google Play</td><td>Microsoft Store</td></tr>
+          <tr><td>Audio engine</td><td>LibVLC + ExoPlayer</td><td>LibVLC only</td><td>LibVLC only, from the system</td></tr>
+          <tr><td>ICY metadata and cover art</td><td>yes</td><td>yes</td><td>yes</td></tr>
+          <tr><td>10-band equalizer with presets</td><td>yes</td><td>yes</td><td>yes</td></tr>
+          <tr><td>Skins, VU meters, sleep timer</td><td>yes</td><td>yes</td><td>yes</td></tr>
+          <tr><td>PLS / JSON playlists, same format</td><td>yes</td><td>yes</td><td>yes</td></tr>
+          <tr><td>Reconnect and watchdog</td><td>yes</td><td>yes</td><td>yes</td></tr>
+          <tr><td>Keeps playing in the background</td><td>foreground service</td><td>system tray</td><td>system tray</td></tr>
+          <tr><td>Keyboard shortcuts and media keys</td><td>—</td><td>yes</td><td>yes (MPRIS)</td></tr>
+          <tr><td>Resizable window, two-column player</td><td>—</td><td>yes</td><td>yes</td></tr>
+          <tr><td>Mouse: wheel volume, back button, drag to reorder</td><td>—</td><td>yes</td><td>wheel volume, drag to reorder</td></tr>
+          <tr><td>Android Auto</td><td>certified</td><td>not applicable</td><td>not applicable</td></tr>
+          <tr><td>Bluetooth media session (AVRCP)</td><td>yes</td><td>—</td><td>—</td></tr>
+          <tr><td>Wi-Fi → mobile data fallback</td><td>yes</td><td>not applicable</td><td>not applicable</td></tr>
+          <tr><td>Chromecast / TV</td><td>yes</td><td>—</td><td>—</td></tr>
+          <tr><td>Distribution</td><td>Google Play</td><td>Microsoft Store</td><td>.deb from GitHub Releases</td></tr>
         </tbody>
       </table>
     </div>
@@ -368,7 +368,8 @@ footer { padding:40px 28px; text-align:center; }
   <h3>Want to try it?</h3>
   <p>Free, no ads, no tracking. Windows 11 x64, from the Microsoft Store, your playlists stay yours.</p>
   <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-    <a href="index.html#download" class="btn btn-primary">🛍 Get it — coming soon</a>
+    <a href="index.html#download" class="btn btn-primary">🛍 Get it from the Microsoft Store</a>
+    <a href="https://toevi.github.io/RadioA-Linux/" class="btn btn-ghost" target="_blank">🐧 RadioA for Linux</a>
     <a href="https://toevi.github.io/RadioAndroidPro/" class="btn btn-ghost" target="_blank">📱 Android version</a>
   </div>
 </div>
@@ -376,12 +377,13 @@ footer { padding:40px 28px; text-align:center; }
 <footer>
   <div class="footer-links">
     <a href="index.html">App page</a>
+    <a href="https://toevi.github.io/RadioA-Linux/" target="_blank">Linux version</a>
     <a href="https://toevi.github.io/RadioAndroidPro/" target="_blank">Android version</a>
     <a href="mailto:tomek.maselko@gmail.com">Email</a>
     <a href="https://github.com/toevi/RadioAndroid-Windows/blob/master/PRIVACY.md" target="_blank">Privacy Policy</a>
     <a href="https://github.com/toevi/RadioAndroid-Windows/issues" target="_blank">Report a problem</a>
   </div>
-  <div class="footer-copy">© 2026 Tomasz Masłowski · VLC, LibVLC and VideoLAN are trademarks of the VideoLAN organisation</div>
+  <div class="footer-copy">© 2026 Tomasz Masłowski · VLC, LibVLC and VideoLAN are trademarks of the VideoLAN organisation · Linux is a registered trademark of Linus Torvalds</div>
 </footer>
 
 </body>

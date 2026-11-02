@@ -9,6 +9,7 @@ the real sound, and a classic hi-fi look called **Vintage**. Free, no account, n
 | Platform | Where |
 |---|---|
 | **Windows 11** (x64) | [![Get it from the Microsoft Store](https://img.shields.io/badge/Microsoft_Store-get_it-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)](https://apps.microsoft.com/detail/9NJPCB908XPS) |
+| **Linux** (amd64, `.deb`) — RadioA for Linux | [![Download from GitHub Releases](https://img.shields.io/badge/GitHub_Releases-download_.deb-2E9E5B?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/toevi/RadioA-Linux/releases/latest) |
 | **Android** (phone, tablet, Android Auto) | [![Get it on Google Play](https://img.shields.io/badge/Google_Play-get_it-34A853?style=for-the-badge&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.tmfgroup.radioandroid) |
 
 RadioA for Windows is distributed **only through the Microsoft Store** (button above). A copy from anywhere else
@@ -42,7 +43,7 @@ window and the radio keeps playing from the notification area.
 - Plays Shoutcast / Icecast and HLS streams, reconnects by itself when the stream or the network drops.
 - 10-band equalizer with your own presets; skins; Modern and **Vintage** player styles.
 - Song title and album cover; sleep timer; media keys, Windows media controls and keyboard shortcuts.
-- Playlists (PLS), equalizer presets and skins are file-compatible with the Android app, both ways.
+- Playlists (PLS) and equalizer presets are file-compatible with the Android and Linux apps, both ways; skins with the Android app.
 
 **Stations are yours to add.** On first start the list holds a few examples (SomaFM and France Musique)
 so there is something to play straight away. The app hosts no streams of its own.
@@ -50,7 +51,7 @@ so there is something to play straight away. The app hosts no streams of its own
 Everything technical — how the engine, the reconnect and the equalizer work — is described on the
 Android app's page: <https://toevi.github.io/RadioAndroidPro/>. The Windows edition uses the same engine
 (libvlc) and the same file formats; it leaves out what only makes sense on a phone (Android Auto,
-Bluetooth remote control).
+Bluetooth remote control). RadioA for Linux has its own page: <https://toevi.github.io/RadioA-Linux/>.
 
 > **This repository is the app's home page and its documents — there is no source code here.**
 

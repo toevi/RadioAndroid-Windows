@@ -216,8 +216,9 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
     <a href="#features">Features</a>
     <a href="#screenshots">Gallery</a>
     <a href="#download">Download</a>
-    <a href="#differences">vs. Android</a>
+    <a href="#differences">Compared</a>
     <a href="details.html">Technical details</a>
+    <a href="https://toevi.github.io/RadioA-Linux/">Linux version</a>
     <a href="https://toevi.github.io/RadioAndroidPro/">Android version</a>
   </div>
 </nav>
@@ -266,6 +267,7 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
     <a href="https://apps.microsoft.com/detail/9NJPCB908XPS" class="btn btn-primary" target="_blank">🛍 Get it from the Microsoft Store</a>
     <a href="#screenshots" class="btn btn-ghost">🖼 See it running</a>
     <a href="details.html" class="btn btn-ghost" style="border-color:rgba(76,194,255,0.35);color:var(--accent);">🔬 Technical details</a>
+    <a href="https://toevi.github.io/RadioA-Linux/" class="btn btn-ghost" target="_blank">🐧 RadioA for Linux</a>
     <a href="https://toevi.github.io/RadioAndroidPro/" class="btn btn-ghost" target="_blank">📱 Android version</a>
   </div>
 </header>
@@ -495,13 +497,16 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
 
       <div class="download-card">
         <div class="dc-icon">📱</div>
-        <div class="dc-title">RadioAndroid for Android</div>
-        <div class="dc-sub">Phone, tablet, Android Auto</div>
+        <div class="dc-title">Other versions</div>
+        <div class="dc-sub">Linux and Android</div>
         <p style="color:#9fb0c4;font-size:0.92rem;margin:12px 0 14px;">
-          The original app, with Android Auto and Bluetooth control. Playlists, equalizer presets and skins
-          move between the phone and the PC in both directions.
+          Playlists and equalizer presets move between all three versions in both directions; skins move
+          between Windows and Android.
         </p>
-        <a href="https://play.google.com/store/apps/details?id=com.tmfgroup.radioandroid" class="btn btn-primary" target="_blank">▶ Get it on Google Play</a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="https://github.com/toevi/RadioA-Linux/releases/latest" class="btn btn-ghost" target="_blank">📦 Linux .deb</a>
+          <a href="https://play.google.com/store/apps/details?id=com.tmfgroup.radioandroid" class="btn btn-ghost" target="_blank">▶ Google Play</a>
+        </div>
       </div>
 
       <div class="download-card">
@@ -523,7 +528,10 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
           <a href="https://github.com/toevi/RadioAndroid-Windows/blob/master/THIRD-PARTY-NOTICES.txt" target="_blank">Third-party licences</a><br/>
           Found a problem? <a href="https://github.com/toevi/RadioAndroid-Windows/issues/new/choose" target="_blank">Report it on GitHub</a>.
         </p>
-        <a href="https://toevi.github.io/RadioAndroidPro/" class="btn btn-ghost" target="_blank">📱 Looking for Android?</a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="https://toevi.github.io/RadioA-Linux/" class="btn btn-ghost" target="_blank">🐧 Looking for Linux?</a>
+          <a href="https://toevi.github.io/RadioAndroidPro/" class="btn btn-ghost" target="_blank">📱 Looking for Android?</a>
+        </div>
       </div>
 
     </div>
@@ -541,25 +549,28 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
     switching from Wi-Fi to mobile data. None of that has a meaning on a desktop, so none of it was
     ported. What is left is the radio itself, plus the things a desktop expects and a phone does not have.
   </p>
+  <div style="overflow-x:auto;">
   <table class="cmp">
     <thead>
-      <tr><th>Feature</th><th>Android</th><th>Windows</th></tr>
+      <tr><th>Feature</th><th>Android</th><th>Windows</th><th>Linux</th></tr>
     </thead>
     <tbody>
-      <tr><td>Internet radio, ICY metadata, cover art</td><td class="yes">yes</td><td class="yes">yes</td></tr>
-      <tr><td>10-band equalizer with presets</td><td class="yes">yes</td><td class="yes">yes</td></tr>
-      <tr><td>Skins, VU meters, sleep timer</td><td class="yes">yes</td><td class="yes">yes</td></tr>
-      <tr><td>PLS / JSON playlists (same file format)</td><td class="yes">yes</td><td class="yes">yes</td></tr>
-      <tr><td>HLS (.m3u8) streams</td><td class="yes">ExoPlayer</td><td class="yes">LibVLC</td></tr>
-      <tr><td>Keeps playing in the background</td><td class="yes">foreground service</td><td class="yes">system tray</td></tr>
-      <tr><td>Keyboard shortcuts &amp; media keys</td><td class="no">—</td><td class="yes">yes</td></tr>
-      <tr><td>Resizable window, two-column player</td><td class="no">—</td><td class="yes">yes</td></tr>
-      <tr><td>Android Auto</td><td class="yes">certified</td><td class="no">not applicable</td></tr>
-      <tr><td>Bluetooth media session (AVRCP)</td><td class="yes">yes</td><td class="no">—</td></tr>
-      <tr><td>Wi-Fi → mobile data fallback</td><td class="yes">yes</td><td class="no">not applicable</td></tr>
-      <tr><td>Chromecast / TV</td><td class="yes">yes</td><td class="no">—</td></tr>
+      <tr><td>Internet radio, ICY metadata, cover art</td><td class="yes">yes</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+      <tr><td>10-band equalizer with presets</td><td class="yes">yes</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+      <tr><td>Skins, VU meters, sleep timer</td><td class="yes">yes</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+      <tr><td>PLS / JSON playlists (same file format)</td><td class="yes">yes</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+      <tr><td>HLS (.m3u8) streams</td><td class="yes">ExoPlayer</td><td class="yes">LibVLC</td><td class="yes">LibVLC</td></tr>
+      <tr><td>Keeps playing in the background</td><td class="yes">foreground service</td><td class="yes">system tray</td><td class="yes">system tray</td></tr>
+      <tr><td>Keyboard shortcuts &amp; media keys</td><td class="no">—</td><td class="yes">yes</td><td class="yes">yes (MPRIS)</td></tr>
+      <tr><td>Resizable window, two-column player</td><td class="no">—</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+      <tr><td>Android Auto</td><td class="yes">certified</td><td class="no">not applicable</td><td class="no">not applicable</td></tr>
+      <tr><td>Bluetooth media session (AVRCP)</td><td class="yes">yes</td><td class="no">—</td><td class="no">—</td></tr>
+      <tr><td>Wi-Fi → mobile data fallback</td><td class="yes">yes</td><td class="no">not applicable</td><td class="no">not applicable</td></tr>
+      <tr><td>Chromecast / TV</td><td class="yes">yes</td><td class="no">—</td><td class="no">—</td></tr>
+      <tr><td>Automatic updates</td><td class="yes">Google Play</td><td class="yes">Microsoft Store</td><td class="no">not yet — new .deb by hand</td></tr>
     </tbody>
   </table>
+  </div>
 </section>
 
 <div class="stripe"></div>
@@ -567,17 +578,17 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
 <!-- UNDER THE HOOD -->
 <section class="section" id="tech">
   <div class="section-title">Under the hood</div>
-  <div class="section-heading">One codebase, <span>two platforms</span></div>
+  <div class="section-heading">One engine, <span>three platforms</span></div>
   <div class="features-grid">
     <div class="feature-card">
       <div class="f-icon">⚙️</div>
       <h3>C# 13 / .NET 10, MAUI on WinUI 3</h3>
-      <p>The namespaces, the view models and the service layer are the Android ones, unchanged — the port was done by subtraction, not by rewriting.</p>
+      <p>The namespaces, the view models and the service layer are the Android ones, unchanged — the port was done by subtraction, not by rewriting. The Linux version shares this engine and service layer under its own Avalonia interface.</p>
     </div>
     <div class="feature-card">
       <div class="f-icon">🎛️</div>
       <h3>LibVLC 3.0.23</h3>
-      <p>The same engine as the phone app uses for everything except HLS. On Windows it handles HLS too, so there is only one engine to reason about.</p>
+      <p>The same engine as the phone app uses for everything except HLS. On Windows it handles HLS too, so there is only one engine to reason about. The Linux version works the same way, with the libvlc from your system.</p>
     </div>
     <div class="feature-card">
       <div class="f-icon">📜</div>
@@ -603,6 +614,7 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
   <div class="footer-logo">RadioA <span>for Windows</span></div>
   <div class="footer-sub">Internet radio for Windows 11 · Microsoft Store</div>
   <div class="footer-links">
+    <a href="https://toevi.github.io/RadioA-Linux/" target="_blank">Linux version</a>
     <a href="https://toevi.github.io/RadioAndroidPro/" target="_blank">Android version</a>
     <a href="mailto:tomek.maselko@gmail.com">Email</a>
     <a href="https://buycoffee.to/toevi" target="_blank">buycoffee.to</a>
@@ -611,7 +623,7 @@ footer { padding:44px 28px; text-align:center; border-top:1px solid var(--border
     <a href="https://github.com/toevi/RadioAndroid-Windows/issues" target="_blank">Report a problem</a>
     <a href="details.html">🔬 Technical details</a>
   </div>
-  <div class="footer-copy">© 2026 Tomasz Masłowski · VLC, LibVLC and VideoLAN are trademarks of the VideoLAN organisation</div>
+  <div class="footer-copy">© 2026 Tomasz Masłowski · VLC, LibVLC and VideoLAN are trademarks of the VideoLAN organisation · Linux is a registered trademark of Linus Torvalds</div>
 </footer>
 
 <script src="vu-live.js?v=1"></script>
