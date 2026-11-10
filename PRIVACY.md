@@ -1,6 +1,6 @@
 # Privacy Policy – RadioA for Windows
 
-**Last updated:** 2 November 2026
+**Last updated:** 10 November 2026
 
 This policy covers **RadioA for Windows**, distributed through the Microsoft Store, and lives on the
 app's page: <https://toevi.github.io/RadioAndroid-Windows/>.
@@ -26,8 +26,8 @@ Everything the app saves stays on your computer and is never uploaded anywhere:
 
 | What | Where |
 |---|---|
-| Your station list (name and stream address of each station) and your settings: equalizer, skins, VU meter mode, favourites, theme, window and list preferences | the app's own folder that Windows creates for it: `%LOCALAPPDATA%\Packages\<app package>\LocalState` |
-| Cached cover art and station logos, and a list of logo addresses already looked up | `%LOCALAPPDATA%\Packages\<app package>\LocalCache` |
+| Your station list (name and stream address of each station) and your settings: equalizer, skins, VU meter mode, favourites, theme, window and list preferences, and the name, country and genre you last used in the station search | the app's own folder that Windows creates for it: `%LOCALAPPDATA%\Packages\<app package>\LocalState` |
+| Cached cover art and station logos, a list of logo addresses already looked up, and the station directory's lists of countries and genres (kept for a week) | `%LOCALAPPDATA%\Packages\<app package>\LocalCache` |
 | Playlists, equalizer presets and skins you save or export, so you can copy or share them yourself | `Documents\RadioA\PLS`, `EQ`, `Skins` |
 
 **Uninstalling** removes the program **together with your station list, settings and cache** —
@@ -39,32 +39,32 @@ start, and changes nothing inside it.)
 
 ## 3. Internet connections the app makes
 
-The app connects to the internet in order to play radio and to show cover art and station logos. No
-personal data is sent in any of these requests.
+The app connects to the internet in order to play radio, to find stations, and to show cover art and
+station logos. Nothing that identifies you is sent in any of these requests.
 
 | Destination | When | What is sent |
 |---|---|---|
 | The radio station's own server (the stream address of the station) | While a station is playing | A standard media stream request. A second, short request to the same address reads the "now playing" title the station broadcasts. |
 | Apple iTunes Search API (`itunes.apple.com`) | When the station reports the currently playing track | The artist and title of that track, to look up the album cover. |
 | Deezer API (`api.deezer.com`) | Fallback, when iTunes has no match for the track | The artist and title of that track. |
-| radio-browser.info | When a station on your list has no logo yet | The station name, to look up its logo. |
+| radio-browser.info (a community directory of internet radio stations) | When you use **Find Stations**; when a station on your list has no logo yet; and when you add a station that you found there | The words you typed in the search (name, country, genre), or the station name to look up its logo. After you add a station found there, a one-time anonymous "this station was picked" count: only the station's identifier in the directory, nothing about you. The directory answers with stations, countries and genres; the lists of countries and genres are kept in the cache (section 2). |
 | AudioAddict / RadioTunes API (`api.audioaddict.com`) | When looking up a station logo; the list is downloaded once and kept in the cache | Nothing but the request for the public channel list. |
 | The server that holds a logo or cover image (for example the station's website, Wikimedia, Apple's or Deezer's image servers, `cdn-images.audioaddict.com`) | When a logo or cover found above is downloaded for the first time | A request for that image. It is then kept in the cache (section 2). |
 
 These requests contain no identifiers, no account information and nothing about you — only the name of
-a song or a station. As with every internet connection, each server can see your computer's IP address;
+a song or a station, or the words you typed into the station search. As with every internet connection, each server can see your computer's IP address;
 their own privacy policies apply to what they do with the requests they receive.
 
 Some services require every client to name itself, so the requests carry a fixed description of the
 app (it still uses the project's technical name, RadioAndroid): `RadioAndroid/6 (tomek.maselko@gmail.com)` for logo and station-title lookups,
-`RadioAndroid/<version> (Windows; +https://toevi.github.io/RadioAndroid-Windows/)` for cover lookups and
+`RadioAndroid/<version> (Windows; +https://toevi.github.io/RadioAndroid-Windows/)` for cover lookups and the station search, and
 `RadioAndroid/1.0 (Windows)` for image downloads. The e-mail address is the developer's contact address
 from section 8. This description is the same for everyone and carries nothing that identifies you.
 
 The app opens web pages in your own browser **only when you click a link**: the project page
 (`toevi.github.io/RadioAndroid-Windows`), the two donation pages on the coffee page (`buycoffee.to`,
 `buymeacoffee.com` — voluntary, they unlock nothing in the app), the station directory `fmstream.org`, Google Play (the Android
-version), and the source-code pages of the open-source components named in the app's licence information. What happens there is covered by
+version), the Linux version's page (`toevi.github.io/RadioA-Linux`), and the source-code pages of the open-source components named in the app's licence information. What happens there is covered by
 those sites' own policies.
 
 ## 4. Windows integration
@@ -85,7 +85,8 @@ those sites' own policies.
   removes it.
 - **Microsoft Store.** Microsoft gives the developer anonymous, aggregated statistics through its
   Partner Center — for example the number of installs and crash reports collected by Windows — under
-  Microsoft's own privacy statement. The app itself adds nothing to them. It does not access your location, contacts, camera, microphone, or files
+  Microsoft's own privacy statement. The app itself adds nothing to them. The app also asks the Microsoft Store itself
+  whether a newer version is available (and can show the Store's own rating window); these requests go to Microsoft through Windows, not to the developer. It does not access your location, contacts, camera, microphone, or files
   outside the folders listed in section 2 and the files you open yourself.
 
 ## 5. Children
